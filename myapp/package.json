@@ -1,0 +1,22 @@
+{
+  "name": "grupopesquisa",
+  "version": "1.0.0",
+  "description": "Sistema para grupo de pesquisas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andgomes95/TP-TECWEB.git"
+  },
+  "author": "André Gomes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andgomes95/TP-TECWEB/issues"
+  },
+  "homepage": "https://github.com/andgomes95/TP-TECWEB#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
