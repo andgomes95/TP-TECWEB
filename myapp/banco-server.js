@@ -1,4 +1,4 @@
-var express = require('express')
+ /*var express = require('express')
 var app = express()
 var body_parser = require('body-parser')
 app.use(body_parser.urlencoded({
@@ -35,7 +35,22 @@ app.get('/disciplinas', function(req, res){
     })
 })
 
-app.get('/professores/cpf',function(req,res){
+app.get('/disciplinas/nome', function(req, res){
+    var disciplina = req.query.id
+    var nome_disciplina = {nome:disciplina}
+    dbo.collection('disciplinas').find(nome_disciplina).toArray(function(err,disciplinas){
+        //if (err) returnconsole.log(err)
+        var cpf_professor = {cpf:disciplinas[0].cpf}
+        //var professor = req.body
+        dbo.collection('professores').find(cpf_professor).toArray(function(err,professor){
+          res.setHeader('Content-Type', 'application/json')
+          res.status(200)
+          res.send(JSON.stringify(professor))    
+        })
+    })
+})
+
+app.get('/professores',function(req,res){
     var professor = req.query.id
     var cpf_professor = {cpf:professor}
     dbo.collection('professores').find(cpf_professor).toArray( function(err, result){
@@ -134,6 +149,18 @@ app.put('/professores', function(req,res){
     })
 })
 
+app.put('/disciplinas/:nome/professor', function(req,res){
+    var cpf_a = req.query.id
+    var disciplinas = req.param.nome
+    var nome_disciplina = {nome:disciplinas.nome}
+    dbo.collection('disciplinas').updateOne(nome_disciplina, {$set : {cpf: cpf_a}} , function(err, result){
+        //if err throw err
+        res.status(200)
+        res.send('disciplina' + disciplinas.nome + 'alterado')
+    })
+})
+
+
 var mongo_client = require('mongodb').MongoClient
 mongo_client.connect('mongodb://localhost:27017/UFSJ', {useNewUrlParser : true},
   function(err,db){
@@ -143,3 +170,4 @@ mongo_client.connect('mongodb://localhost:27017/UFSJ', {useNewUrlParser : true},
         console.log('Funcionando...')
     })
 })
+*/

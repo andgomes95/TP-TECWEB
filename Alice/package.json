@@ -1,0 +1,11 @@
+{
+  "name": "alice",
+  "version": "1.0.0",
+  "description": "Sistema para grupos de pesquisa, utilizando o Arts Lab in Interfaces, Computers, and Everything Else como exemplo",
+  "main": "createdb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "André Gomes",
+  "license": "ISC"
+}
