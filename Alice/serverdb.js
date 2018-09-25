@@ -192,13 +192,14 @@ app.get('/publicacoes', function(req, res){
 })
 
 //GET uma publicacao
-app.get('/publicacoes/code', function(req,res){
-    var code = req.query.eq
+app.get('/publicacoes/:code', function(req,res){
+    var code = req.params.code
     dbo.collection('publicacoes').find({code:code}).toArray(function(err,publicacoes){
         //if err console.log(err)
         res.setHeader('Content-Type', 'application/json')
         res.status(200)
-        res.send(JSON.stringify(publicacoes))    
+        if (publicacoes.length>0) res.send(JSON.stringify(publicacoes))    
+        else res.send(JSON.stringify("Não existe esta publicacao"))
     })
 })
 
@@ -211,8 +212,8 @@ app.delete('/publicacoes',function(req,res){
 })
 
 //Delete uma publicacoes
-app.delete('/publicacoes/code',function(req,res){
-    var code = req.query.eq
+app.delete('/publicacoes/:code',function(req,res){
+    var code = req.params.code
     var removido = {code:code}
     dbo.collection('publicacoes').deleteOne(removido , function(err, result){
         res.status(200)
@@ -225,6 +226,7 @@ app.post('/publicacoes',function(req,res){
     var publicacoes = req.body
     dbo.collection('publicacoes').insertOne(publicacoes , function(err, result){
         //if err throw err
+        console.log(result)
         res.status(200)
         res.send('publicacoes adicionadas')
     })
@@ -287,8 +289,8 @@ app.get('/projetos', function(req, res){
 })
 
 //GET um projeto
-app.get('/projetos/nome', function(req,res){
-    var nome = req.query.eq
+app.get('/projetos/:nome', function(req,res){
+    var nome = req.params.nome
     dbo.collection('projetos').find({nome:nome}).toArray(function(err,projetos){
         //if err console.log(err)
         res.setHeader('Content-Type', 'application/json')
@@ -306,8 +308,8 @@ app.delete('/projetos',function(req,res){
 })
 
 //Delete um projetos
-app.delete('/projetos/nome',function(req,res){
-    var nome = req.query.eq
+app.delete('/projetos/:nome',function(req,res){
+    var nome = req.params.nome
     var removido = {nome:nome}
     dbo.collection('projetos').deleteOne(removido , function(err, result){
         res.status(200)
@@ -336,38 +338,6 @@ app.put('/projetos',function(req,res){
     })
 })
 
-app.put('/publicacoes/:code/colaboradores',function(req, res) {
-
-    var colaboradores = req.query.eq;
-    var list_colaboradores = colaboradores.split(',')
-    var code_publicacoes = req.params.code;
-    var where = {code : code_publicacoes};
-
-    var list_publicacoes;
-    dbo.collection('publicacoes').find(where).toArray(function(err,publicacoes){
-        var public_list = []
-        list_publicacoes = JSON.stringify(publicacoes,["autores"])
-        //JSON tem tamanho 4 se vazio
-        if(list_publicacoes.length>4){
-            list_publicacoes = list_publicacoes.split('[')
-            list_publicacoes = list_publicacoes[2].split('\"')
-            for (var j = 1; j < list_publicacoes.length;j = j+2){
-                public_list.push(list_publicacoes[j])
-            }
-        }
-
-        for (var i = 0; i < list_colaboradores.length; i++) {
-            if (!(public_list.indexOf(list_colaboradores[i]) != -1)){
-                public_list.push(list_colaboradores[i])
-            }
-        } 
-
-        dbo.collection('publicacoes').updateOne(where, {$set: {autores: public_list}} ,function(err, result) {
-            res.status(200);
-            res.send('Colaboradores adicionados nas publicacoes!' + public_list);
-        });
-    })
-});
 //Alterar colaboradores em projetos
 app.put('/projetos/:nome/colaboradores',function(req, res) {
 
