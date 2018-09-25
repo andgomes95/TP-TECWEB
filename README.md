@@ -18,15 +18,13 @@
 - Pesquisar maneira de organizar e disponibilizar mídias relacionadas a projetos e minicursos;
 - Validar com os usuários reais;
 
-##Planejamento e Execução do Trabalho
+## Planejamento e Execução do Trabalho
 
-- Desenvolvimento de um aplicação web onde professores e alunos podem adicionar
-dados sobre membros, projetos, publicações, mini-cursos e eventos.
+- Desenvolvimento de um aplicação web onde professores e alunos podem adicionar dados sobre membros, projetos e publicações.
 - Interface diferente para alunos e professores, com permissões diferente.
-- O aplicativo irá, complementarmente, postar lembretes no Twitter da Grupo de
-Pesquisa sobre eventos e feitos dele.
-- Sistema para inscrição em eventos e minicursos, podendo definir no formulário qual
-nível de permissão pode se inscrever.
+- Desenvolvimento de interface para organizações de mini-cursos e eventos. 
+- O aplicativo irá, complementarmente, postar lembretes no Twitter da Grupo de Pesquisa sobre eventos e feitos dele.
+- Sistema para inscrição em eventos e minicursos, podendo definir no formulário qual nível de permissão pode se inscrever.
 
 
 
