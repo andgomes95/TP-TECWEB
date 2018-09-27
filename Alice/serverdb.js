@@ -19,22 +19,6 @@ app.get('/colaboradores', function(req, res){
     })
 })
 
-//GET um Colaborador
-app.get('/colaboradores/:email', function(req,res){
-    var email = req.params.email
-    dbo.collection('colaboradores').find({email:email}).toArray(function(err,colaboradores){
-        if( err)     console.log(err)
-        res.setHeader('Content-Type', 'application/json')
-        res.status(200)
-        result = JSON.stringify(colaboradores)
-        if (result.length > 2){
-            res.send(result) 
-        }else{
-            res.send(JSON.stringify(email+ ' nao cadastrado!') );
-        }
-    })
-})
-
 //GET Colaboradores graduando
 app.get('/colaboradores/graduando', function(req,res){
     fm = {formacao:"graduando"}
@@ -82,6 +66,22 @@ app.get('/colaboradores/professor', function(req,res){
             res.send(result) 
         }else{
             res.send(JSON.stringify('Não há Professores') );
+        }
+    })
+})
+
+//GET um Colaborador
+app.get('/colaboradores/:email', function(req,res){
+    var email = req.params.email
+    dbo.collection('colaboradores').find({email:email}).toArray(function(err,colaboradores){
+        if( err)     console.log(err)
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200)
+        result = JSON.stringify(colaboradores)
+        if (result.length > 2){
+            res.send(result) 
+        }else{
+            res.send(JSON.stringify(email+ ' nao cadastrado!') );
         }
     })
 })
@@ -154,31 +154,47 @@ app.put('/colaboradores/:email/publicacoes',function(req, res) {
 
     var list_colaboradores;
     dbo.collection('colaboradores').find(where).toArray(function(err,colaboradores){
-        //if err console.log(err)
-        var colab_list = []
-        list_colaboradores = JSON.stringify(colaboradores,["publicacoes"])
-        //tem tamanho 4 quando é um JSON Vazio
-        if(list_colaboradores.length>4){
-            list_colaboradores = list_colaboradores.split('[')
-            list_colaboradores = list_colaboradores[2].split('\"')
-            for (var j = 1; j < list_colaboradores.length;j = j+2){
-                colab_list.push(list_colaboradores[j])
+        dbo.collection('publicacoes').find().toArray(function(err,publicacoes){
+            var public_list = []
+            var aux_public_list = JSON.stringify(publicacoes,["code"])
+            if(aux_public_list.length>4){
+                aux_public_list = aux_public_list.split('[')
+                aux_public_list = aux_public_list[1].split('\"')
+                for (var l = 3; l < aux_public_list.length;l = l+4){
+                    public_list.push(aux_public_list[l])
+                }
+
             }
+            //if err console.log(err)
+            var colab_list = []
+            list_colaboradores = JSON.stringify(colaboradores,["publicacoes"])
+            //tem tamanho 4 quando é um JSON Vazio
+            if(list_colaboradores.length>4){
+                list_colaboradores = list_colaboradores.split('[')
+                list_colaboradores = list_colaboradores[2].split('\"')
+                for (var j = 1; j < list_colaboradores.length;j = j+2){
+                    colab_list.push(list_colaboradores[j])
+                }
 
-        }
-        for (var i = 0; i < list_publicacoes.length; i++) {
-            if (!(colab_list.indexOf(list_publicacoes[i]) != -1)){
-                colab_list.push(list_publicacoes[i])
             }
-        } 
+            var z
+            for (var i = 0; i < list_publicacoes.length; i++) {
+                if (!(colab_list.indexOf(list_publicacoes[i]) != -1)){
+                    for(z = 0;public_list.length > z;z++){
+                        if(list_publicacoes[i]==public_list[z])
+                            colab_list.push(list_publicacoes[i])
+                    }
+                }
+            } 
 
-
-        dbo.collection('colaboradores').updateOne(where, {$set: {publicacoes: colab_list}} ,function(err, result) {
-            res.status(200);
-            res.send('Publicações adicionada em colaboradores com sucesso!'+ colab_list);
+            dbo.collection('colaboradores').updateOne(where, {$set: {publicacoes: colab_list}} ,function(err, result) {
+                res.status(200);
+                res.send('Publicações adicionada em colaboradores com sucesso!');
+            })
         })
     });   
 });
+
 
 /**************************************************** PUBLICACOES **********************************************************/
 //GET publicacoes
@@ -253,26 +269,43 @@ app.put('/publicacoes/:code/colaboradores',function(req, res) {
 
     var list_publicacoes;
     dbo.collection('publicacoes').find(where).toArray(function(err,publicacoes){
-        var public_list = []
-        list_publicacoes = JSON.stringify(publicacoes,["autores"])
-        //JSON tem tamanho 4 se vazio
-        if(list_publicacoes.length>4){
-            list_publicacoes = list_publicacoes.split('[')
-            list_publicacoes = list_publicacoes[2].split('\"')
-            for (var j = 1; j < list_publicacoes.length;j = j+2){
-                public_list.push(list_publicacoes[j])
-            }
-        }
+        dbo.collection('colaboradores').find().toArray(function(err,colaboradores){
+            var colab_list = []
+            var aux_colab_list = JSON.stringify(colaboradores,["email"])
 
-        for (var i = 0; i < list_colaboradores.length; i++) {
-            if (!(public_list.indexOf(list_colaboradores[i]) != -1)){
-                public_list.push(list_colaboradores[i])
+            if(aux_colab_list.length>4){
+                aux_colab_list = aux_colab_list.split('[')
+                aux_colab_list = aux_colab_list[1].split('\"')
+                for (var l = 3 ; l < aux_colab_list.length;l = l+4){
+                    colab_list.push(aux_colab_list[l])
+                }
             }
-        } 
 
-        dbo.collection('publicacoes').updateOne(where, {$set: {autores: list_colaboradores}} ,function(err, result) {
-            res.status(200);
-            res.send('Colaboradores adicionados nas publicacoes!' + public_list);
+            var public_list = []
+            list_publicacoes = JSON.stringify(publicacoes,["autores"])
+            //JSON tem tamanho 4 se vazio
+            if(list_publicacoes.length>4){
+                list_publicacoes = list_publicacoes.split('[')
+                list_publicacoes = list_publicacoes[2].split('\"')
+                for (var j = 1; j < list_publicacoes.length;j = j+2){
+                    public_list.push(list_publicacoes[j])
+                }
+            }
+            var k
+            for (var i = 0; i < list_colaboradores.length; i++) {
+                for(k = 0;k<colab_list.length;k++){
+                    if(colab_list[k]==list_colaboradores[i]){
+                        if (!(public_list.indexOf(list_colaboradores[i]) != -1)){
+                            public_list.push(list_colaboradores[i])
+                        }
+                    }
+                }
+            } 
+
+            dbo.collection('publicacoes').updateOne(where, {$set: {autores: public_list}} ,function(err, result) {
+                res.status(200);
+                res.send('Colaboradores adicionados nas publicacoes!' + public_list);
+            });
         });
     })
 });
@@ -371,6 +404,62 @@ app.put('/projetos/:nome/colaboradores',function(req, res) {
         });
     });
 });
+
+/**************************************************** EVENTOS **********************************************************/
+/*//GET eventos
+app.get('/eventos', function(req, res){
+    dbo.collection('eventos').find().toArray(function(err,eventos){
+        //if err console.log(err)
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200)
+        res.send(JSON.stringify(eventos))    
+    })
+})
+//GET um evento
+app.get('/eventos/:nome', function(req,res){
+    var nome = req.params.nome
+    dbo.collection('eventos').find({nome:nome}).toArray(function(err,eventos){
+        //if err console.log(err)
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200)
+        res.send(JSON.stringify(eventos))    
+    })
+})
+//Delete eventos
+app.delete('/eventos',function(req,res){
+    dbo.collection('eventos').remove({} , function(err, eventos){
+        res.status(204)
+        res.send('delete '+ eventos)
+    })
+})
+//Delete um eventos
+app.delete('/eventos/:nome',function(req,res){
+    var nome = req.params.nome
+    var removido = {nome:nome}
+    dbo.collection('eventos').deleteOne(removido , function(err, eventos){
+        res.status(200)
+        res.send('delete '+ nome)
+    })
+})
+//Adicionar eventos
+app.post('/eventos',function(req,res){
+    var eventos = req.body
+    dbo.collection('eventos').insertOne(eventos , function(err, result){
+        //if err throw err
+        res.status(200)
+        res.send('eventos adicionadas')
+    })
+})
+//Alterar eventos
+app.put('/eventos',function(req,res){
+    var evento = req.body
+    var id = {nome: evento.nome}
+    dbo.collection('eventos').updateOne(id,{$set: evento} , function(err, result){
+        //if err throw err
+        res.status(200)
+        res.send('eventos alterados')
+    })
+})*/
 
 var mongo_client = require('mongodb').MongoClient
 mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true},

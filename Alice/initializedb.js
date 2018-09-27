@@ -2,6 +2,7 @@ var mongo_client = require('mongodb').MongoClient
 mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true},function(err,db){
 	if(err) throw err
 	var dbo = db.db('ALICE')
+	/*Criação da Coleção de colaboradores*/
 	dbo.createCollection( 'colaboradores', function(err,res){
 		if(err) throw err
 		var db_alunos = [
@@ -16,6 +17,7 @@ mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true}
 			db.close()
 		})
 	})
+	/*Criação da Coleção de publicações*/
 	dbo.createCollection( 'publicacoes', function(err,res){
 		var db_disc = [
 		{code: 'SBCM2017Mosaicode', nome: 'Web Audio application development with Mosaicode', evento: '16th Brazilian Symposium on Computer Music', ano: '2017', local_evento: ' São Paulo',autores: ['fls@ufsj.edu.br']},
@@ -28,6 +30,7 @@ mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true}
 			db.close()
 		})
 	})
+	/*Criação da Coleção de projetos*/
 	dbo.createCollection( 'projetos', function(err,res){
 		var db_disc = [
 		{nome: 'Mosaicode', descricao: 'Ambiente de Programação Visual'},
@@ -39,4 +42,16 @@ mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true}
 			db.close()
 		})
 	})
+	/*Criação da Coleção de eventos*/
+/*	dbo.createCollection( 'eventos', function(err,res){
+		var db_disc = [
+		{nome: 'Ubimus', descricao: 'Congresso de Musica Ubiqua', Data_Inicio: '11/09/2018', Data_Fim: '14/09/2018'},
+		{nome: 'SBCM', descricao: 'Simpósio Brasileiro de Computação Musical', Data_Inicio:'09/09/2018', Data_Fim: '12/09/2018'}
+		]
+		dbo.collection('eventos').insertMany(db_disc, function(err,res){
+			if(err) throw err
+			console.log('eventos inseridos')
+			db.close()
+		})
+	})*/
 })
