@@ -381,27 +381,44 @@ app.put('/projetos/:nome/colaboradores',function(req, res) {
 
     var list_projetos;
     dbo.collection('projetos').find(where).toArray(function(err,projetos){
-        var project_list = []
-        list_projetos = JSON.stringify(projetos,["colaboradores"])
-        //JSON tem tamanho 4 se vazio
-        if(list_projetos.length>4){
-            list_projetos = list_projetos.split('[')
-            list_projetos = list_projetos[2].split('\"')
-            for (var j = 1; j < list_projetos.length;j = j+2){
-                project_list.push(list_projetos[j])
-            }
-        }
+        dbo.collection('colaboradores').find().toArray(function(err,colaboradores){
+            var colab_list = []
+            var aux_colab_list = JSON.stringify(colaboradores,["email"])
 
-        for (var i = 0; i < list_colaboradores.length; i++) {
-            if (!(project_list.indexOf(list_colaboradores[i]) != -1)){
-                project_list.push(list_colaboradores[i])
+            if(aux_colab_list.length>4){
+                aux_colab_list = aux_colab_list.split('[')
+                aux_colab_list = aux_colab_list[1].split('\"')
+                for (var l = 3 ; l < aux_colab_list.length;l = l+4){
+                    colab_list.push(aux_colab_list[l])
+                }
             }
-        } 
+            console.log(colab_list)
+            var project_list = []
+            list_projetos = JSON.stringify(projetos,["colaboradores"])
+            //JSON tem tamanho 4 se vazio
+            if(list_projetos.length>4){
+                list_projetos = list_projetos.split('[')
+                list_projetos = list_projetos[2].split('\"')
+                for (var j = 1; j < list_projetos.length;j = j+2){
+                    project_list.push(list_projetos[j])
+                }
+            }
+            var k = 0
+            for (var i = 0; i < list_colaboradores.length; i++) {
+                for(k = 0;k<colab_list.length;k++){
+                    if(colab_list[k]==list_colaboradores[i]){
+                        if (!(project_list.indexOf(list_colaboradores[i]) != -1)){
+                            project_list.push(list_colaboradores[i])
+                        }
+                    }
+                }
+            } 
 
-        dbo.collection('projetos').updateOne(where, {$set: {colaboradores: project_list}} ,function(err, result) {
-            res.status(200);
-            res.send('Colaboradores'+ list_colaboradores     + 'adicionados nos projetos!');
-        });
+            dbo.collection('projetos').updateOne(where, {$set: {colaboradores: project_list}} ,function(err, result) {
+                res.status(200);
+                res.send('Colaboradores'+ list_colaboradores     + 'adicionados nos projetos!');
+            });
+        })
     });
 });
 
