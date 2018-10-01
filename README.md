@@ -28,7 +28,6 @@
 
 ## Proximos Passos
 
-- Criar Get de colaboradores em uma publicação
 - Criar Get de projetos com dado colaborador
 - Criar Get de publicações com dado colaborador
 - Verificar se os posts tem inserido dados corretamente

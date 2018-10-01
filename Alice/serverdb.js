@@ -36,6 +36,59 @@ app.get('/colaboradores/graduando', function(req,res){
     })
 })
 
+//GET Colaboradores graduando
+app.get('/colaboradores/projeto', function(req,res){
+    var projeto = req.query.eq
+    fm = {projeto:projeto}
+    dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
+        if( err)     console.log(err)
+        console.log(colaboradores.length)
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200)
+        result = JSON.stringify(colaboradores)
+        if (result.length > 2){
+            res.send(result) 
+        }else{
+            res.send(JSON.stringify('Não há colaboradores neste projeto') );
+        }
+    })
+})
+
+//GET Colaborador em um projeto
+app.get('/colaboradores/projetos', function(req,res){
+    var projeto = req.query.eq
+    fm = {projeto:projeto}
+    dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
+        if( err)     console.log(err)
+        console.log(colaboradores.length)
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200)
+        result = JSON.stringify(colaboradores)
+        if (result.length > 2){
+            res.send(result) 
+        }else{
+            res.send(JSON.stringify('Não há colaboradores neste projeto') );
+        }
+    })
+})
+
+//GET Colaborador em uma publicação
+app.get('/colaboradores/publicacoes', function(req,res){
+    var publicacoes = req.query.eq
+    fm = {publicacoes:publicacoes}
+    dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
+        if( err)     console.log(err)
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200)
+        result = JSON.stringify(colaboradores)
+        if (result.length > 2){
+            res.send(result) 
+        }else{
+            res.send(JSON.stringify('Não há colaboradores nesta publicação') );
+        }
+    })
+})
+
 //GET Colaboradores mestrando
 app.get('/colaboradores/mestrando', function(req,res){
     fm = {formacao:"mestrando"}
@@ -94,7 +147,7 @@ app.delete('/colaboradores',function(req,res){
     })
 })
 
-//Delete ue um colaborador
+//Delete um colaborador
 app.delete('/colaboradores/:email',function(req,res){
     var email = req.params.email
     var removido = {email:email}
@@ -207,6 +260,24 @@ app.get('/publicacoes', function(req, res){
     })
 })
 
+//GET publicacoes dado autor
+app.get('/publicacoes/colaboradores', function(req,res){
+    var colaboradores = req.query.eq
+    fm = {autores:colaboradores}
+    dbo.collection('publicacoes').find(fm).toArray(function(err,publicacoes){
+        if( err)     console.log(err)
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200)
+        result = JSON.stringify(publicacoes)
+        if (result.length > 2){
+            res.send(result) 
+        }else{
+            res.send(JSON.stringify('Não há publicacoes com este colaborador') );
+        }
+    })
+})
+
+
 //GET uma publicacao
 app.get('/publicacoes/:code', function(req,res){
     var code = req.params.code
@@ -318,6 +389,23 @@ app.get('/projetos', function(req, res){
         res.setHeader('Content-Type', 'application/json')
         res.status(200)
         res.send(JSON.stringify(projetos))    
+    })
+})
+
+//GET projetos dado autor
+app.get('/projetos/colaboradores', function(req,res){
+    var colaboradores = req.query.eq
+    fm = {colaboradores:colaboradores}
+    dbo.collection('projetos').find(fm).toArray(function(err,projetos){
+        if( err)     console.log(err)
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200)
+        result = JSON.stringify(projetos)
+        if (result.length > 2){
+            res.send(result) 
+        }else{
+            res.send(JSON.stringify('Não há projetos com este colaborador') );
+        }
     })
 })
 
