@@ -26,5 +26,13 @@
 - O aplicativo irá, complementarmente, postar lembretes no Twitter da Grupo de Pesquisa sobre eventos e feitos dele.
 - Sistema para inscrição em eventos e minicursos, podendo definir no formulário qual nível de permissão pode se inscrever.
 
+## Proximos Passos
 
-
+- Criar Get de colaboradores em uma publicação
+- Criar Get de projetos com dado colaborador
+- Criar Get de publicações com dado colaborador
+- Verificar se os posts tem inserido dados corretamente
+- Mensagem de erro ao inserir publicações, projetos e colaboradores invalidos e demais problemas
+- chave unica - Lucas Lagoa, Carlos Magno
+- Inserir coleções Eventos e MiniCursos
+- Express Node - Ricardo
