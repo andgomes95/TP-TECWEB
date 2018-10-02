@@ -511,60 +511,61 @@ app.put('/projetos/:nome/colaboradores',function(req, res) {
 });
 
 /**************************************************** EVENTOS **********************************************************/
-/*//GET eventos
-app.get('/eventos', function(req, res){
-    dbo.collection('eventos').find().toArray(function(err,eventos){
-        //if err console.log(err)
-        res.setHeader('Content-Type', 'application/json')
-        res.status(200)
-        res.send(JSON.stringify(eventos))    
+    /*//GET eventos
+    app.get('/eventos', function(req, res){
+        dbo.collection('eventos').find().toArray(function(err,eventos){
+            //if err console.log(err)
+            res.setHeader('Content-Type', 'application/json')
+            res.status(200)
+            res.send(JSON.stringify(eventos))    
+        })
     })
-})
-//GET um evento
-app.get('/eventos/:nome', function(req,res){
-    var nome = req.params.nome
-    dbo.collection('eventos').find({nome:nome}).toArray(function(err,eventos){
-        //if err console.log(err)
-        res.setHeader('Content-Type', 'application/json')
-        res.status(200)
-        res.send(JSON.stringify(eventos))    
+    //GET um evento
+    app.get('/eventos/:nome', function(req,res){
+        var nome = req.params.nome
+        dbo.collection('eventos').find({nome:nome}).toArray(function(err,eventos){
+            //if err console.log(err)
+            res.setHeader('Content-Type', 'application/json')
+            res.status(200)
+            res.send(JSON.stringify(eventos))    
+        })
     })
-})
-//Delete eventos
-app.delete('/eventos',function(req,res){
-    dbo.collection('eventos').remove({} , function(err, eventos){
-        res.status(204)
-        res.send('delete '+ eventos)
+    //Delete eventos
+    app.delete('/eventos',function(req,res){
+        dbo.collection('eventos').remove({} , function(err, eventos){
+            res.status(204)
+            res.send('delete '+ eventos)
+        })
     })
-})
-//Delete um eventos
-app.delete('/eventos/:nome',function(req,res){
-    var nome = req.params.nome
-    var removido = {nome:nome}
-    dbo.collection('eventos').deleteOne(removido , function(err, eventos){
-        res.status(200)
-        res.send('delete '+ nome)
+    //Delete um eventos
+    app.delete('/eventos/:nome',function(req,res){
+        var nome = req.params.nome
+        var removido = {nome:nome}
+        dbo.collection('eventos').deleteOne(removido , function(err, eventos){
+            res.status(200)
+            res.send('delete '+ nome)
+        })
     })
-})
-//Adicionar eventos
-app.post('/eventos',function(req,res){
-    var eventos = req.body
-    dbo.collection('eventos').insertOne(eventos , function(err, result){
-        //if err throw err
-        res.status(200)
-        res.send('eventos adicionadas')
+    //Adicionar eventos
+    app.post('/eventos',function(req,res){
+        var eventos = req.body
+        dbo.collection('eventos').insertOne(eventos , function(err, result){
+            //if err throw err
+            res.status(200)
+            res.send('eventos adicionadas')
+        })
     })
-})
-//Alterar eventos
-app.put('/eventos',function(req,res){
-    var evento = req.body
-    var id = {nome: evento.nome}
-    dbo.collection('eventos').updateOne(id,{$set: evento} , function(err, result){
-        //if err throw err
-        res.status(200)
-        res.send('eventos alterados')
+    //Alterar eventos
+    app.put('/eventos',function(req,res){
+        var evento = req.body
+        var id = {nome: evento.nome}
+        dbo.collection('eventos').updateOne(id,{$set: evento} , function(err, result){
+            //if err throw err
+            res.status(200)
+            res.send('eventos alterados')
+        })
     })
-})*/
+*/
 
 var mongo_client = require('mongodb').MongoClient
 mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true},
