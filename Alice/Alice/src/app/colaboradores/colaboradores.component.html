@@ -1,0 +1,24 @@
+
+<ul>
+  <li *ngFor="let colaboradores of colaboradores" (click)="selecionarColaboradores(colaboradores)">
+    {{colaboradores.nome}}
+  </li>
+</ul>
+<br>
+<button (click)="adicionar()">Adicionar</button>
+<br>
+<div *ngIf="colaboradoresNovo">
+  <div><span>Nome: </span> <input [(ngModel)]="colaboradoresNovo.nome" placeholder="nome"></div>
+  <div><span>Email: </span> <input [(ngModel)]="colaboradoresNovo.email" placeholder="email"></div>
+
+  <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+</div>
+
+<div *ngIf="colaboradoresSelecionado">
+  <h2>{{colaboradoresSelecionado.nome}}</h2>
+  <div><span>Email:&#09; </span> <input [(ngModel)]="colaboradoresSelecionado.email" placeholder="email"><br>
+    <span>Formação:&#09; </span> <input [(ngModel)]="colaboradoresSelecionado.formacao" placeholder="formacao"><br>
+    <span>Github:&#09; </span> <input [(ngModel)]="colaboradoresSelecionado.github" placeholder="github"><br>
+    <span>Lattes:&#09; </span> <input [(ngModel)]="colaboradoresSelecionado.lattes" placeholder="lattes">
+  
+  <br><button (click)="apagar()">Apagar</button></div>

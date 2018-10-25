@@ -1,10 +1,13 @@
 var express = require('express')
 var app = express()
 var body_parser = require('body-parser')
+var cors = require('cors')
 app.use(body_parser.urlencoded({
     extended: true
 }))
 app.use(body_parser.json())
+app.use(cors())
+
 
 var mongo_cliente = require('mongodb').mongo_cliente
 var dbo

@@ -7,5 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "André Gomes",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@ng-bootstrap/ng-bootstrap": "^3.3.1",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.0.0-alpha.6",
+    "cors": "^2.8.4",
+    "cors-anywhere": "^0.4.1",
+    "express": "^4.16.4",
+    "font-awesome": "^4.7.0",
+    "mongodb": "^3.1.8"
+  }
 }
