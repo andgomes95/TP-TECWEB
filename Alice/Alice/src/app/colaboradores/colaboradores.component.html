@@ -1,24 +1,36 @@
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel title="Colaboradores">
+    <ng-template ngbPanelContent>
+      <table class="table table-hover"><thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Formação</th>
+          <th scope="col">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let colaboradores of colaboradores" (click)="selecionarColaboradores(colaboradores)">
+            <td>{{colaboradores.nome}}</td>
+            <td>{{colaboradores.email}}</td>
+            <td>{{colaboradores.formacao}}</td>
+            <td>
+              <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-danger btn-sm" (click)="apagar(aluno)"><i class="fa fa-times"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <button (click)="adicionar()">Adicionar</button>
+      <br>
+      <div *ngIf="colaboradoresNovo">
+        <div><span>Nome: </span> <input [(ngModel)]="colaboradoresNovo.nome" placeholder="nome"></div>
+        <div><span>Email: </span> <input [(ngModel)]="colaboradoresNovo.email" placeholder="email"></div>
 
-<ul>
-  <li *ngFor="let colaboradores of colaboradores" (click)="selecionarColaboradores(colaboradores)">
-    {{colaboradores.nome}}
-  </li>
-</ul>
-<br>
-<button (click)="adicionar()">Adicionar</button>
-<br>
-<div *ngIf="colaboradoresNovo">
-  <div><span>Nome: </span> <input [(ngModel)]="colaboradoresNovo.nome" placeholder="nome"></div>
-  <div><span>Email: </span> <input [(ngModel)]="colaboradoresNovo.email" placeholder="email"></div>
-
-  <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
-</div>
-
-<div *ngIf="colaboradoresSelecionado">
-  <h2>{{colaboradoresSelecionado.nome}}</h2>
-  <div><span>Email:&#09; </span> <input [(ngModel)]="colaboradoresSelecionado.email" placeholder="email"><br>
-    <span>Formação:&#09; </span> <input [(ngModel)]="colaboradoresSelecionado.formacao" placeholder="formacao"><br>
-    <span>Github:&#09; </span> <input [(ngModel)]="colaboradoresSelecionado.github" placeholder="github"><br>
-    <span>Lattes:&#09; </span> <input [(ngModel)]="colaboradoresSelecionado.lattes" placeholder="lattes">
-  
-  <br><button (click)="apagar()">Apagar</button></div>
+        <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+      </div>
+      
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
