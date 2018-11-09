@@ -27,6 +27,7 @@
       <div *ngIf="colaboradoresNovo">
         <div><span>Nome: </span> <input [(ngModel)]="colaboradoresNovo.nome" placeholder="nome"></div>
         <div><span>Email: </span> <input [(ngModel)]="colaboradoresNovo.email" placeholder="email"></div>
+        <div><span>Formacao: </span> <input [(ngModel)]="colaboradoresNovo.formacao" placeholder="formacao"></div>
 
         <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
       </div>

@@ -24,7 +24,7 @@
       <br>
       <div *ngIf="projetosNovo">
         <div><span>Nome: </span> <input [(ngModel)]="projetosNovo.nome" placeholder="nome"></div>
-        <div><span>Email: </span> <input [(ngModel)]="projetosNovo.email" placeholder="email"></div>
+        <div><span>Descricao: </span> <input [(ngModel)]="projetosNovo.descricao" placeholder="descricao"></div>
 
         <br><button (click)="salvarNovoProjetos()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
       </div>

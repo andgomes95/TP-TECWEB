@@ -1,3 +1,40 @@
-<p>
-  publicacoes works!
-</p>
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel title="Publicacoes">
+    <ng-template ngbPanelContent>
+      <table class="table table-hover"><thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Código</th>
+          <th scope="col">Evento</th>
+          <th scope="col">Ano</th>
+          <th scope="col">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let publicacoes of publicacoes" (click)="selecionarPublicacoes(publicacoes)">
+            <td>{{publicacoes.nome}}</td>
+            <td>{{publicacoes.code}}</td>
+            <td>{{publicacoes.evento}}</td>
+            <td>{{publicacoes.ano}}</td>
+            <td>
+              <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-danger btn-sm" (click)="apagar(publicacoes)"><i class="fa fa-times"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <button (click)="adicionar()">Adicionar</button>
+      <br>
+      <div *ngIf="publicacoesNovo">
+        <div><span>Nome: </span> <input [(ngModel)]="publicacoesNovo.nome" placeholder="nome"></div>
+        <div><span> Código : </span> <input [(ngModel)]="publicacoesNovo.code" placeholder="code"></div>
+        <div><span> Evento : </span> <input [(ngModel)]="publicacoesNovo.evento" placeholder="evento"></div>
+        <div><span> Ano : </span> <input [(ngModel)]="publicacoesNovo.ano" placeholder="ano"></div>
+
+        <br><button (click)="salvarNovoPublicacoes()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+      </div>
+      
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
