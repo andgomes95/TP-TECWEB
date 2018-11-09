@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Projetos } from './projetos';
+import { ProjetosService} from '../projetos.service';
 
 @Component({
   selector: 'app-projetos',
@@ -7,9 +9,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjetosComponent implements OnInit {
 
-  constructor() { }
+  projetos: Projetos[];
+  projetosSelecionado: Projetos;
+  projetosNovo: Projetos;
+
+  constructor(private projetosService: ProjetosService) { }
 
   ngOnInit() {
+    this.loadProjetos();
+  }
+
+  loadProjetos(): void{
+    this.projetosService.getProjetos().subscribe(
+      projetos => this.projetos = projetos
+    );
+  }
+
+  selecionarProjetos(projetos: Projetos): void{
+    this.projetosSelecionado = projetos;
+  }
+
+  salvar(): void{
+    this.projetosService.atualizarProjetos(
+      this.projetosSelecionado).subscribe();
+      this.projetosSelecionado = null;
+  }
+
+  apagar(): void{
+    this.projetosService.apagarProjetos(
+      this.projetosSelecionado).subscribe();
+      this.projetos = this.projetos.filter(a => a !==
+        this.projetosSelecionado);
+      this.projetosSelecionado = null;
+  }
+
+  adicionar(): void{
+    this.projetosNovo = new Projetos();
+  }
+
+  cancelar(): void{
+    this.projetosNovo = null;
+  }
+
+  salvarNovoProjetos(): void{
+    this.projetosService.adicionar(this.projetosNovo).subscribe();
+    this.projetos.push(this.projetosNovo);
+    this.projetosNovo=null;
   }
 
 }
