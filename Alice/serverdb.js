@@ -437,7 +437,7 @@ app.delete('/projetos/:nome',function(req,res){
     var removido = {nome:nome}
     dbo.collection('projetos').deleteOne(removido , function(err, result){
         res.status(200)
-        res.send('delete '+ code)
+        res.send('delete '+ nome)
     })
 })
 
