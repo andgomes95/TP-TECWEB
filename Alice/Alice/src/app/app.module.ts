@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { ColaboradoresComponent } from './colaboradores/colaboradores.component';
 import { ProjetosComponent } from './projetos/projetos.component';
 import { PublicacoesComponent } from './publicacoes/publicacoes.component';
+import { AppRoutingModule } from './app-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,7 @@ import { PublicacoesComponent } from './publicacoes/publicacoes.component';
     PublicacoesComponent
   ],
   imports: [
-    BrowserModule, NgbModule, FormsModule, HttpClientModule
+    BrowserModule, NgbModule, FormsModule, HttpClientModule, AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
