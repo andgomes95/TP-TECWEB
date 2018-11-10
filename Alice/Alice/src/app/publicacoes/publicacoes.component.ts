@@ -50,6 +50,7 @@ export class PublicacoesComponent implements OnInit {
 
   cancelar(): void{
     this.publicacoesNovo = null;
+    this.publicacoesAtualizar = null;
   }
 
   salvarNovoPublicacoes(): void{

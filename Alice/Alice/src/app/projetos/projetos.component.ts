@@ -50,6 +50,7 @@ export class ProjetosComponent implements OnInit {
 
   cancelar(): void{
     this.projetosNovo = null;
+    this.projetosAtualizar = null;
   }
 
   salvarNovoProjetos(): void{

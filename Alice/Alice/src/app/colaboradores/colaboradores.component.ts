@@ -50,6 +50,7 @@ export class ColaboradoresComponent implements OnInit {
 
   cancelar(): void{
     this.colaboradoresNovo = null;
+    this.colaboradoresAtualizar = null;
   }
 
   salvarNovoColaboradores(): void{
