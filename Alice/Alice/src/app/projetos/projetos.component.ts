@@ -12,6 +12,7 @@ export class ProjetosComponent implements OnInit {
   projetos: Projetos[];
   projetosSelecionado: Projetos;
   projetosNovo: Projetos;
+  projetosAtualizar: Projetos;
 
   constructor(private projetosService: ProjetosService) { }
 
@@ -56,5 +57,12 @@ export class ProjetosComponent implements OnInit {
     this.projetos.push(this.projetosNovo);
     this.projetosNovo=null;
   }
+  initAtualizar(projetos: Projetos): void{
+    this.projetosAtualizar = projetos;
+  }
 
+  salvarAtualizarProjetos(): void{
+    this.projetosService.atualizarProjetos(this.projetosAtualizar).subscribe();
+    this.projetosAtualizar=null;
+  }
 }

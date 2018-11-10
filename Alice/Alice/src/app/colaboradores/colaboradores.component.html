@@ -15,7 +15,7 @@
             <td>{{colaboradores.email}}</td>
             <td>{{colaboradores.formacao}}</td>
             <td>
-              <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(colaboradores)"><i class="fa fa-pencil"></i></button>&nbsp;
               <button type="button" class="btn btn-danger btn-sm" (click)="apagar(colaboradores)"><i class="fa fa-times"></i></button>
             </td>
           </tr>
@@ -31,7 +31,15 @@
 
         <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
       </div>
-      
+
+      <div *ngIf="colaboradoresAtualizar">
+          <div><span>Nome: </span> <input [(ngModel)]="colaboradoresAtualizar.nome" placeholder="nome"></div>
+          <div><span>Email: </span> <input [(ngModel)]="colaboradoresAtualizar.email" placeholder="email"></div>
+          <div><span>Formacao: </span> <input [(ngModel)]="colaboradoresAtualizar.formacao" placeholder="formacao"></div>
+  
+          <br><button (click)="salvarAtualizarColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+        </div>
+
     </ng-template>
   </ngb-panel>
 </ngb-accordion>

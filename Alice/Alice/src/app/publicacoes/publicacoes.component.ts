@@ -12,6 +12,7 @@ export class PublicacoesComponent implements OnInit {
   publicacoes: Publicacoes[];
   publicacoesSelecionado: Publicacoes;
   publicacoesNovo: Publicacoes;
+  publicacoesAtualizar: Publicacoes;
 
   constructor(private publicacoesService: PublicacoesService) { }
 
@@ -56,5 +57,14 @@ export class PublicacoesComponent implements OnInit {
     this.publicacoes.push(this.publicacoesNovo);
     this.publicacoesNovo=null;
   }
+  
+  initAtualizar(publicacoes: Publicacoes): void{
+    this.publicacoesAtualizar = publicacoes;
+  }
 
+  salvarAtualizarPublicacoes(): void{
+    this.publicacoesService.atualizarPublicacoes(this.publicacoesAtualizar).subscribe();
+    this.publicacoesAtualizar=null;
+  }
+  
 }

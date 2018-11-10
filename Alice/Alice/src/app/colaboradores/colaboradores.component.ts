@@ -12,6 +12,7 @@ export class ColaboradoresComponent implements OnInit {
   colaboradores: Colaboradores[];
   colaboradoresSelecionado: Colaboradores;
   colaboradoresNovo: Colaboradores;
+  colaboradoresAtualizar: Colaboradores;
 
   constructor(private colaboradoresService: ColaboradoresService) { }
 
@@ -55,6 +56,15 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradoresService.adicionar(this.colaboradoresNovo).subscribe();
     this.colaboradores.push(this.colaboradoresNovo);
     this.colaboradoresNovo=null;
+  }
+
+  initAtualizar(colaboradores: Colaboradores): void{
+    this.colaboradoresAtualizar = colaboradores;
+  }
+
+  salvarAtualizarColaboradores(): void{
+    this.colaboradoresService.atualizarColaboradores(this.colaboradoresAtualizar).subscribe();
+    this.colaboradoresAtualizar=null;
   }
 
 }

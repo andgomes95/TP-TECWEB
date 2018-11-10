@@ -17,7 +17,7 @@
             <td>{{publicacoes.evento}}</td>
             <td>{{publicacoes.ano}}</td>
             <td>
-              <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(publicacoes)"><i class="fa fa-pencil"></i></button>&nbsp;
               <button type="button" class="btn btn-danger btn-sm" (click)="apagar(publicacoes)"><i class="fa fa-times"></i></button>
             </td>
           </tr>
@@ -34,6 +34,15 @@
 
         <br><button (click)="salvarNovoPublicacoes()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
       </div>
+
+      <div *ngIf="publicacoesAtualizar">
+          <div><span>Nome: </span> <input [(ngModel)]="publicacoesAtualizar.nome" placeholder="nome"></div>
+          <div><span> Código : </span> <input [(ngModel)]="publicacoesAtualizar.code" placeholder="code"></div>
+          <div><span> Evento : </span> <input [(ngModel)]="publicacoesAtualizar.evento" placeholder="evento"></div>
+          <div><span> Ano : </span> <input [(ngModel)]="publicacoesAtualizar.ano" placeholder="ano"></div>
+
+          <br><button (click)="salvarAtualizarPublicacoes()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+        </div>
       
     </ng-template>
   </ngb-panel>

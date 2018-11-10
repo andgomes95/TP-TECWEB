@@ -13,7 +13,7 @@
             <td>{{projetos.nome}}</td>
             <td>{{projetos.descricao}}</td>
             <td>
-              <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(projetos)"><i class="fa fa-pencil"></i></button>&nbsp;
               <button type="button" class="btn btn-danger btn-sm" (click)="apagar(projetos)"><i class="fa fa-times"></i></button>
             </td>
           </tr>
@@ -28,6 +28,13 @@
 
         <br><button (click)="salvarNovoProjetos()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
       </div>
+
+      <div *ngIf="projetosAtualizar">
+          <div><span>Nome: </span> <input [(ngModel)]="projetosAtualizar.nome" placeholder="nome"></div>
+          <div><span>Descricao: </span> <input [(ngModel)]="projetosAtualizar.descricao" placeholder="descricao"></div>
+  
+          <br><button (click)="salvarAtualizarProjetos()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+        </div>
       
     </ng-template>
   </ngb-panel>
