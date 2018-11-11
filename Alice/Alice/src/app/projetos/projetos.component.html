@@ -1,6 +1,20 @@
 <br><h2 class="text-white"  style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Projetos</h2><br>
-<button type="button" class="btn btn-secondary" (click)="adicionar()">Adicionar</button>
-<br><br>
+<div ngbDropdown >
+    <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle><i class="fas fa-user-plus"></i></button>
+    <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="bg-secondary mb-3">
+      <div class="dropdown-item" *ngIf="projetosNovo" class="bg-secondary mb-3">
+          <div class="card bg-secondary mb-3" style="max-width: 25rem;">
+              <div class="card-header">Novo Colaborador</div>
+              <div class="card-body">
+                  <div><span class="text-white">Nome: </span> <input [(ngModel)]="projetosNovo.nome" placeholder="nome"></div>
+                  <div><span class="text-white">Descricao: </span> <input [(ngModel)]="projetosNovo.descricao" placeholder="descricao"></div>
+              
+                  <br><button (click)="salvarNovoProjetos()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div><br>
 <div class="card-deck">
 
     <div *ngFor="let projetos of projetos" (click)="selecionarProjetos(projetos)">
@@ -18,18 +32,6 @@
   </div>
 
   <br>
-  <br>
-  <div *ngIf="projetosNovo">
-    <div class="card bg-secondary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Novo Projeto</div>
-        <div class="card-body">
-            <div><span class="text-white">Nome: </span> <input [(ngModel)]="projetosNovo.nome" placeholder="nome"></div>
-            <div><span class="text-white">Descrição: </span> <input [(ngModel)]="projetosNovo.descricao" placeholder="descricao"></div>
-        
-            <br><button (click)="salvarNovoProjetos()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
-        </div>
-      </div>
-  </div>
 
   <div *ngIf="projetosAtualizar">
       <div class="card bg-secondary mb-3" style="max-width: 18rem;">

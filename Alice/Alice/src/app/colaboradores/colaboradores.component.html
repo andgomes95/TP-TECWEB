@@ -1,7 +1,21 @@
 <br><h2 class="text-white"  style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Colaboradores</h2><br>
-  <button type="button" class="btn btn-secondary" (click)="adicionar()">Adicionar</button>
-  <br>
-  <br>
+<div ngbDropdown >
+  <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle><i class="fas fa-user-plus"></i></button>
+  <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="bg-secondary mb-3">
+    <div class="dropdown-item" *ngIf="colaboradoresNovo" class="bg-secondary mb-3">
+        <div class="card bg-secondary mb-3" style="max-width: 25rem;">
+            <div class="card-header">Novo Colaborador</div>
+            <div class="card-body">
+                <div><span class="text-white">Nome: </span> <input [(ngModel)]="colaboradoresNovo.nome" placeholder="nome"></div>
+                <div><span class="text-white">Email: </span> <input [(ngModel)]="colaboradoresNovo.email" placeholder="email"></div>
+                <div><span class="text-white">Formacao: </span> <input [(ngModel)]="colaboradoresNovo.formacao" placeholder="formacao"></div>
+            
+                <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+            </div>
+          </div>
+    </div>
+  </div>
+</div><br>
 <div class="card-deck">
 
   <div *ngFor="let colaboradores of colaboradores" (click)="selecionarColaboradores(colaboradores)">
@@ -19,18 +33,7 @@
   </div>
 </div>
 <br>
-  <div *ngIf="colaboradoresNovo">
-    <div class="card bg-secondary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Novo Colaborador</div>
-        <div class="card-body">
-            <div><span class="text-white">Nome: </span> <input [(ngModel)]="colaboradoresNovo.nome" placeholder="nome"></div>
-            <div><span class="text-white">Email: </span> <input [(ngModel)]="colaboradoresNovo.email" placeholder="email"></div>
-            <div><span class="text-white">Formacao: </span> <input [(ngModel)]="colaboradoresNovo.formacao" placeholder="formacao"></div>
-        
-            <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
-        </div>
-      </div>
-  </div>
+
 
   <div *ngIf="colaboradoresAtualizar">
       <div class="card bg-secondary mb-3" style="max-width: 18rem;">
@@ -44,4 +47,4 @@
             </div>
       </div>
       
-    </div>
+</div>

@@ -1,6 +1,22 @@
 <br><h2 class="text-white"  style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Publicações</h2><br>
-<button type="button" class="btn btn-secondary" (click)="adicionar()" data-toggle="modal" data-target="#adicionarColaboradorModal">Adicionar</button>
-<br><br>
+<div ngbDropdown >
+    <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle><i class="fas fa-user-plus"></i></button>
+    <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="bg-secondary mb-3">
+      <div class="dropdown-item" *ngIf="publicacoesNovo" class="bg-secondary mb-3">
+          <div class="card bg-secondary mb-3" style="max-width: 25rem;">
+              <div class="card-header">Novo Colaborador</div>
+              <div class="card-body">
+                  <div><span class="text-white">Nome: </span> <input [(ngModel)]="publicacoesNovo.nome" placeholder="nome"></div>
+                  <div><span class="text-white">Código: </span> <input [(ngModel)]="publicacoesNovo.code" placeholder="code"></div>
+                  <div><span class="text-white">Evento: </span> <input [(ngModel)]="publicacoesNovo.evento" placeholder="evento"></div>
+                  <div><span class="text-white">Ano: </span> <input [(ngModel)]="publicacoesNovo.ano" placeholder="ano"></div>
+              
+                  <br><button (click)="salvarNovoPublicacoes()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div><br>
 
 <div class="card-deck">
 
@@ -21,21 +37,6 @@
   </div>
 
   <br>
-  <br>
-
-<div *ngIf="publicacoesNovo">
-    <div class="card bg-secondary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Nova Publicação</div>
-        <div class="card-body">
-            <div><span class="text-white">Nome: </span> <input [(ngModel)]="publicacoesNovo.nome" placeholder="nome"></div>
-            <div><span class="text-white">Código: </span> <input [(ngModel)]="publicacoesNovo.code" placeholder="code"></div>
-            <div><span class="text-white">Evento: </span> <input [(ngModel)]="publicacoesNovo.evento" placeholder="evento"></div>
-            <div><span class="text-white">Ano: </span> <input [(ngModel)]="publicacoesNovo.ano" placeholder="ano"></div>
-        
-            <br><button (click)="salvarNovoPublicacoes()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
-        </div>
-      </div>
-  </div>
 
   <div *ngIf="publicacoesAtualizar">
       <div class="card bg-secondary mb-3" style="max-width: 18rem;">
