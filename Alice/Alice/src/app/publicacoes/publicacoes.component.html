@@ -21,7 +21,7 @@
 <div class="card-deck">
 
     <div *ngFor="let publicacoes of publicacoes" (click)="selecionarPublicacoes(publicacoes)">
-      <div class="card bg-light mb-3" style="width: 20rem;">
+      <div class="card bg-light mb-3" style="width: 25rem;">
         <div class="card-body">
           <h5 class="card-title">{{publicacoes.code}}</h5>
           <p class="card-text">
@@ -31,27 +31,27 @@
           </p>
           <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(publicacoes)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
           <button type="button" class="btn btn-danger btn-sm" (click)="apagar(publicacoes)"><i class="fa fa-times"></i></button>
+          <br><br>
+          <div *ngIf="publicacoesAtualizar==publicacoes">
+              <div class="card bg-secondary mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Atualizar {{publicacoesAtualizar.nome}}</div>
+                  <div class="card-body">
+                    <div><span class="text-white">Nome: </span> <input [(ngModel)]="publicacoesAtualizar.nome" placeholder="nome"></div>
+                    <div><span class="text-white">Código: </span> <input [(ngModel)]="publicacoesAtualizar.code" placeholder="code"></div>
+                    <div><span class="text-white">Evento: </span> <input [(ngModel)]="publicacoesAtualizar.evento" placeholder="evento"></div>
+                    <div><span class="text-white">Ano: </span> <input [(ngModel)]="publicacoesAtualizar.ano" placeholder="ano"></div>
+              
+                    <br><button (click)="salvarAtualizarPublicacoes()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+        
+                    </div>
+              </div>
+              
+            </div>
         </div>
       </div>
     </div>
   </div>
 
   <br>
-
-  <div *ngIf="publicacoesAtualizar">
-      <div class="card bg-secondary mb-3" style="max-width: 18rem;">
-          <div class="card-header">Atualizar {{publicacoesAtualizar.nome}}</div>
-          <div class="card-body">
-            <div><span class="text-white">Nome: </span> <input [(ngModel)]="publicacoesAtualizar.nome" placeholder="nome"></div>
-            <div><span class="text-white">Código: </span> <input [(ngModel)]="publicacoesAtualizar.code" placeholder="code"></div>
-            <div><span class="text-white">Evento: </span> <input [(ngModel)]="publicacoesAtualizar.evento" placeholder="evento"></div>
-            <div><span class="text-white">Ano: </span> <input [(ngModel)]="publicacoesAtualizar.ano" placeholder="ano"></div>
-      
-            <br><button (click)="salvarAtualizarPublicacoes()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
-
-            </div>
-      </div>
-      
-    </div>
 
     

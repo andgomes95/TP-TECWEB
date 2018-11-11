@@ -19,7 +19,7 @@
 <div class="card-deck">
 
   <div *ngFor="let colaboradores of colaboradores" (click)="selecionarColaboradores(colaboradores)">
-    <div class="card bg-light mb-3" style="width: 18rem;">
+    <div class="card bg-light mb-3" style="width: 25rem;">
       <div class="card-body">
         <h5 class="card-title">{{colaboradores.nome}}</h5>
         <p class="card-text">
@@ -28,23 +28,22 @@
         </p>
         <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(colaboradores)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
         <button type="button" class="btn btn-danger btn-sm" (click)="apagar(colaboradores)"><i class="fa fa-times"></i></button>
+        <br><br>
+        <div *ngIf="colaboradoresAtualizar==colaboradores">
+            <div class="card bg-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Atualizar {{colaboradoresAtualizar.nome}}</div>
+                <div class="card-body">
+                  <div><span class="text-white">Nome: </span> <input [(ngModel)]="colaboradoresAtualizar.nome" placeholder="nome"></div>
+                  <div><span class="text-white">Email: </span> <input [(ngModel)]="colaboradoresAtualizar.email" placeholder="email"></div>
+                  <div><span class="text-white">Formacao: </span> <input [(ngModel)]="colaboradoresAtualizar.formacao" placeholder="formacao"></div>
+            
+                  <br><button (click)="salvarAtualizarColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
+                  </div>
+            </div>
+            
+      </div>
       </div>
     </div>
   </div>
 </div>
 <br>
-
-
-  <div *ngIf="colaboradoresAtualizar">
-      <div class="card bg-secondary mb-3" style="max-width: 18rem;">
-          <div class="card-header">Atualizar {{colaboradoresAtualizar.nome}}</div>
-          <div class="card-body">
-            <div><span class="text-white">Nome: </span> <input [(ngModel)]="colaboradoresAtualizar.nome" placeholder="nome"></div>
-            <div><span class="text-white">Email: </span> <input [(ngModel)]="colaboradoresAtualizar.email" placeholder="email"></div>
-            <div><span class="text-white">Formacao: </span> <input [(ngModel)]="colaboradoresAtualizar.formacao" placeholder="formacao"></div>
-      
-            <br><button (click)="salvarAtualizarColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
-            </div>
-      </div>
-      
-</div>
