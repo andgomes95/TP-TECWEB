@@ -31,7 +31,7 @@ export class ProjetosComponent implements OnInit {
   }
 
   salvar(): void{
-    this.projetosService.atualizarProjetos(
+    this.projetosService.adicionar(
       this.projetosSelecionado).subscribe();
       this.projetosSelecionado = null;
   }

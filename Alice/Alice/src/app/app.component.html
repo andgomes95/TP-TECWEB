@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <div class="container-fluid bg-dark">
   <div class="jumbotron">
-    <h1 class="display-4" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">{{title }}</h1> 
+    <a href="http://localhost:4200/" class="text-secondary"><h1 class="display-4" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">{{title }}</h1> </a>
     <br> <div style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{subtitle}}</div>
   </div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,5 +24,52 @@
     </div>
   </nav>
   <router-outlet></router-outlet>
+
+  <footer class="page-footer font-small blue pt-4 bg-light text-center">
+
+      <!-- Footer Links -->
+      <div class="container-fluid text-md-left">
+  
+        <!-- Grid row -->
+        <div class="row">
+  
+          <!-- Grid column -->
+          <div class="col-md-4 mt-md-0 mt-3 " align="center">
+  
+            <!-- Content -->
+            <a href="http://ufsj.edu.br"><img src="https://www.ufsj.edu.br/portal2-images/menu-logo_menor.png" height="150px" width="150px"></a>
+            <!--img src="imagens/ufsj.jpg"-->
+  
+          </div>
+          <!-- Grid column -->
+  
+          <hr class="clearfix w-100 d-md-none pb-3">
+  
+          <!-- Grid column -->
+          <div class="col-md-4 mb-md-0 mb-3" align="center">
+  
+              <h5 class="text-center  ">Redes Sociais</h5>
+              <a href="#"><i class="fab fa-facebook fa-4x"></i></a>&nbsp;&nbsp;
+              <a href="#"><i class="fab fa-twitter fa-4x"></i></a>&nbsp;&nbsp;
+              <a href="#"><i class="fab fa-github fa-4x"></i></a><br>
+            
+          </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+          <div class="col-md-4 mb-md-0 mb-3" align="center">
+  
+              <!-- Links -->
+              <h5 class="text-center  ">Parceiros</h5>
+  
+          </div>
+            <!-- Grid column -->
+  
+        </div>
+        <!-- Grid row -->
+        <div class="container-fluid text-right" >      © 2018 - André Gomes&nbsp;&nbsp;</div>
+      </div>
+      
+    </footer>
 
 </div>

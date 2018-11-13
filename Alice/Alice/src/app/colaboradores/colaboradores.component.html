@@ -25,6 +25,8 @@
         <p class="card-text">
             <br><i class="fas fa-envelope"></i> {{colaboradores.email}}
             <br><i class="fas fa-user-graduate"></i> {{colaboradores.formacao}}
+            <br><div><a href="{{colaboradores.github}}"><button type="button" class="btn btn-secondary btn-sm"><i class="fab fa-github"></i></button></a>&nbsp;
+            <a href="{{colaboradores.lattes}}"><button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-align-justify"></i></button></a></div>
         </p>
         <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(colaboradores)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
         <button type="button" class="btn btn-danger btn-sm" (click)="apagar(colaboradores)"><i class="fa fa-times"></i></button>

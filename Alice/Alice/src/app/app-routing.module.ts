@@ -5,6 +5,7 @@ import {ProjetosComponent} from './projetos/projetos.component';
 import {PublicacoesComponent} from './publicacoes/publicacoes.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/colaboradores', pathMatch:'full'},
   { path: 'colaboradores', component: ColaboradoresComponent, data : {title: 'Lista'} },
   { path: 'projetos', component: ProjetosComponent, data : {title: 'Lista'}},
   {path: 'publicacoes', component: PublicacoesComponent, data : {title: 'Lista'}}
