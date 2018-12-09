@@ -1,0 +1,18 @@
+<div id="hero">
+<br><div id="card card-container" class="card text-center" style="width: 25rem;">
+    <div class="card-header">
+      <h1>Login Screen</h1>
+      <p id="profile-name" class="profile-name-card"></p>
+    </div>
+    <div class="card-body">
+      <form class="form-signin">
+        <span id="reauth-email" class="reauth-email"></span>
+        <input type="text" id="nome" class="form-control" placeholder="Email" required autofocus name="email" [(ngModel)]="email">
+        <input type="password" id="password" class="form-control" placeholder="Password" required name="password" [(ngModel)]="password">
+        <br>
+        <button type="submit" class="btn btn-lg btn-get-started btn-success btn-block btn-signin" (click)="login()">Entrar</button>
+      </form>
+    </div>
+  </div>
+</div>
+ 

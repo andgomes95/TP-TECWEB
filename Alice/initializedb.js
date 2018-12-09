@@ -6,10 +6,10 @@ mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true}
 	dbo.createCollection( 'colaboradores', function(err,res){
 		if(err) throw err
 		var db_alunos = [
-				{nome: 'Andre Gomes', email: 'andgomes95@gmail.com', formacao: 'graduando', github: 'https://github.com/andgomes95', lattes: 'http://lattes.cnpq.br/0762220978450376'},
-				{nome: 'Jose Mauro', email: 'jmsandy@gmail.com', formacao: 'mestrando', github: 'https://github.com/jmsandy', lattes: 'http://lattes.cnpq.br/5849035895177823'},
-				{nome: 'Frederico Resende', email: 'fredribeiro97@gmail.com', formacao: 'graduando', github: 'https://github.com/frederr97', lattes: 'http://lattes.cnpq.br/6452558884220881'},
-				{nome: 'Flavio Schiavoni', email: 'fls@ufsj.edu.br', formacao: 'professor', github: 'https://github.com/flschiavoni', lattes: 'http://lattes.cnpq.br/1259591090948385'}
+				{nome: 'Andre Gomes', email: 'andgomes95@gmail.com', formacao: 'graduando', github: 'https://github.com/andgomes95', lattes: 'http://lattes.cnpq.br/0762220978450376',password: "123456"},
+				{nome: 'Jose Mauro', email: 'jmsandy@gmail.com', formacao: 'mestrando', github: 'https://github.com/jmsandy', lattes: 'http://lattes.cnpq.br/5849035895177823', password: "123456"},
+				{nome: 'Frederico Resende', email: 'fredribeiro97@gmail.com', formacao: 'graduando', github: 'https://github.com/frederr97', lattes: 'http://lattes.cnpq.br/6452558884220881', password: "123456"},
+				{nome: 'Flavio Schiavoni', email: 'fls@ufsj.edu.br', formacao: 'professor', github: 'https://github.com/flschiavoni', lattes: 'http://lattes.cnpq.br/1259591090948385', password: "123456"}
 			]
 		dbo.collection('colaboradores').insertMany(db_alunos, function(err,res){
 			if(err) throw err

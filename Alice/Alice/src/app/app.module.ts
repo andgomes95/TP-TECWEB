@@ -8,6 +8,8 @@ import { ColaboradoresComponent } from './colaboradores/colaboradores.component'
 import { ProjetosComponent } from './projetos/projetos.component';
 import { PublicacoesComponent } from './publicacoes/publicacoes.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginscreenComponent } from './loginscreen/loginscreen.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     ColaboradoresComponent,
     ProjetosComponent,
-    PublicacoesComponent
+    PublicacoesComponent,
+    LoginscreenComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule, NgbModule, FormsModule, HttpClientModule, AppRoutingModule

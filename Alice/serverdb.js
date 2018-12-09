@@ -1,16 +1,67 @@
-var express = require('express')
-var app = express()
-var body_parser = require('body-parser')
-var cors = require('cors')
+var express = require('express');
+var app = express();
+
+var cors = require('cors');
+app.use(cors());
+
+var body_parser = require('body-parser');
+
 app.use(body_parser.urlencoded({
     extended: true
-}))
-app.use(body_parser.json())
-app.use(cors())
+}));
 
+app.use(body_parser.json());
+app.use(express.static('public'));
 
-var mongo_cliente = require('mongodb').mongo_cliente
-var dbo
+var jwt = require('jsonwebtoken');
+
+var mongo_cliente = require('mongodb').MongoClient;
+var dbo;
+
+app.post('/login', function(req, res) {
+    var user = req.body;
+
+    dbo.collection('colaboradores').findOne({ email: user.email }, function(err, colaborador) {
+        if (err) return res.status(500).send();
+
+        if (!colaborador) {
+            return res.status(401).send({ token: null, tipo: null });
+        } else {
+            if ( colaborador.password == user.password ) {
+                var token = jwt.sign({ id: aluno._id }, 'supersecret', {
+                    expiresIn: 86400
+                });
+
+                res.status(200);
+                if(colaborador.formacao==""){
+                    res.send({ token: token, tipo: 'professor' });
+                }else{
+                    res.send({ token: token, tipo: 'colaborador' });
+                }
+                
+            } else {
+                return res.status(401).send({ token: null, tipo: null });
+            }
+        }
+    });
+});
+
+function verificaToken(req, res, next) {
+
+    var token = req.headers['x-access-token'];
+
+    if (!token)
+        return res.status(403).send({ auth: false, message: 'Nenhum token disponvível.' });
+
+    jwt.verify(token, 'supersecret', function(err, decoded) {
+        if (err)
+            return res.status(500).send({ auth: false, message: 'Erro de autenticação.' });
+
+        req.userId = decoded.id;
+        next();
+    });
+}
+
 /**************************************************** COLABORADORES **********************************************************/
 //GET colaboradores
 app.get('/colaboradores', function(req, res){

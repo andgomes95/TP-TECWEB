@@ -9,6 +9,8 @@
                 <div><span class="text-white">Nome: </span> <input [(ngModel)]="colaboradoresNovo.nome" placeholder="nome"></div>
                 <div><span class="text-white">Email: </span> <input [(ngModel)]="colaboradoresNovo.email" placeholder="email"></div>
                 <div><span class="text-white">Formacao: </span> <input [(ngModel)]="colaboradoresNovo.formacao" placeholder="formacao"></div>
+                <div><span class="text-white">Github: </span> <input [(ngModel)]="colaboradoresNovo.github" placeholder="github"></div>
+                <div><span class="text-white">Lattes: </span> <input [(ngModel)]="colaboradoresNovo.lattes" placeholder="lattes"></div>
             
                 <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
             </div>
@@ -25,8 +27,8 @@
         <p class="card-text">
             <br><i class="fas fa-envelope"></i> {{colaboradores.email}}
             <br><i class="fas fa-user-graduate"></i> {{colaboradores.formacao}}
-            <br><div><a href="{{colaboradores.github}}"><button type="button" class="btn btn-secondary btn-sm"><i class="fab fa-github"></i></button></a>&nbsp;
-            <a href="{{colaboradores.lattes}}"><button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-align-justify"></i></button></a></div>
+            <br><div><a href="{{colaboradores.github}}" target="_blank"><button type="button" class="btn btn-secondary btn-sm"><i class="fab fa-github"></i></button></a>&nbsp;
+            <a href="{{colaboradores.lattes}}" target="_blank"><button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-align-justify"></i></button></a></div>
         </p>
         <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(colaboradores)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
         <button type="button" class="btn btn-danger btn-sm" (click)="apagar(colaboradores)"><i class="fa fa-times"></i></button>
@@ -38,6 +40,8 @@
                   <div><span class="text-white">Nome: </span> <input [(ngModel)]="colaboradoresAtualizar.nome" placeholder="nome"></div>
                   <div><span class="text-white">Email: </span> <input [(ngModel)]="colaboradoresAtualizar.email" placeholder="email"></div>
                   <div><span class="text-white">Formacao: </span> <input [(ngModel)]="colaboradoresAtualizar.formacao" placeholder="formacao"></div>
+                  <div><span class="text-white">Github: </span> <input [(ngModel)]="colaboradoresAtualizar.github" placeholder="github"></div>
+                  <div><span class="text-white">Lattes: </span> <input [(ngModel)]="colaboradoresAtualizar.lattes" placeholder="lattes"></div>
             
                   <br><button (click)="salvarAtualizarColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
                   </div>

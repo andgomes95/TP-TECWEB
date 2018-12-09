@@ -16,6 +16,7 @@
     "cors-anywhere": "^0.4.1",
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
+    "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.8"
   }
 }
