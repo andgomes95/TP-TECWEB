@@ -17,7 +17,7 @@ export class LoginScreenService{
     
 
   login(email: string, password: string): Observable<User> {
-    return this.http.post<User>('http://localhost:3000/login', {
+    return this.http.post<User>('http://localhost:3001/login', {
       email: email,
       password: password
     }, httpOptions);

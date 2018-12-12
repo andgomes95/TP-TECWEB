@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Projetos } from './projetos';
 import { ProjetosService} from '../projetos.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-projetos',
@@ -14,10 +15,13 @@ export class ProjetosComponent implements OnInit {
   projetosNovo: Projetos;
   projetosAtualizar: Projetos;
 
-  constructor(private projetosService: ProjetosService) { }
+  title: any;
+
+  constructor(private projetosService: ProjetosService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadProjetos();
+    this.route.data.subscribe(data => this.title = data);
   }
 
   loadProjetos(): void{

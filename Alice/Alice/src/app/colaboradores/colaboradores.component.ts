@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Colaboradores } from './colaboradores';
 import { ColaboradoresService} from '../colaboradores.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-colaboradores',
@@ -15,10 +16,15 @@ export class ColaboradoresComponent implements OnInit {
   colaboradoresNovo: Colaboradores;
   colaboradoresAtualizar: Colaboradores;
 
-  constructor(private colaboradoresService: ColaboradoresService) { }
+  value: any;
+
+  title: any;
+
+  constructor(private colaboradoresService: ColaboradoresService, private route: ActivatedRoute) {  }
 
   ngOnInit() {
     this.loadColaboradores();
+    this.route.data.subscribe(data => this.title = data);
   }
 
   loadColaboradores(): void{

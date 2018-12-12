@@ -8,15 +8,11 @@ import {HomeComponent} from './home/home.component';
 import { AuthGuard } from './loginscreen/login-auth.guard';
 
 const routes: Routes = [
-  //{ path: '', component: LoginscreenComponent, pathMatch: 'full'},
-  {path: '', redirectTo: '/home', pathMatch:'full'},
-  { path: 'home', component: HomeComponent,
-    //canActivate: [AuthGuard],
-    children: [
-      { path: 'colaboradores', component: ColaboradoresComponent, data : {title: 'Lista'}, canActivate: [AuthGuard] },
-      { path: 'projetos', component: ProjetosComponent, data : {title: 'Lista'}, canActivate: [AuthGuard]},
-      {path: 'publicacoes', component: PublicacoesComponent, data : {title: 'Lista'},canActivate: [AuthGuard]},
-    ] },
+  { path: '', component: LoginscreenComponent, pathMatch: 'full'},
+  { path: 'home', component: HomeComponent,canActivate: [AuthGuard]},
+  { path: 'colaboradores', component: ColaboradoresComponent, data : {title: 'Lista'}, canActivate: [AuthGuard] },
+  { path: 'projetos', component: ProjetosComponent, data : {title: 'Lista'}, canActivate: [AuthGuard]},
+  {path: 'publicacoes', component: PublicacoesComponent, data : {title: 'Lista'},canActivate: [AuthGuard]},
   { path: 'loginscreen', component: LoginscreenComponent }
 ];
 

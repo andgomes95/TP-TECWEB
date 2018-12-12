@@ -4,9 +4,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Publicacoes} from './publicacoes/publicacoes';
 
 const httpOptions = {
-    headers: new 
-    HttpHeaders({'Content-Type': 'application/json'})
-};
+    headers: new HttpHeaders({'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('TOKEN')})
+  };
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,7 @@ export class PublicacoesService{
     
     getPublicacoes(): Observable<Publicacoes[]>{
         return this.http.get<
-        Publicacoes[]>('http://localhost:3001/publicacoes');
+        Publicacoes[]>('http://localhost:3001/publicacoes', httpOptions);
     }
 
     atualizarPublicacoes(publicacoes: Publicacoes): Observable<any>{

@@ -4,9 +4,12 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Colaboradores} from './colaboradores/colaboradores';
 
 const httpOptions = {
-    headers: new 
-    HttpHeaders({'Content-Type': 'application/json'})
-};
+    headers: new HttpHeaders(
+        {
+            'Content-Type': 'application/json',
+            'x-access-token': localStorage.getItem('TOKEN')
+        })
+  };
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +20,7 @@ export class ColaboradoresService{
     
     getColaboradores(): Observable<Colaboradores[]>{
         return this.http.get<
-        Colaboradores[]>('http://localhost:3001/colaboradores');
+        Colaboradores[]>('http://localhost:3001/colaboradores', httpOptions);
     }
 
     atualizarColaboradores(colaboradores: Colaboradores): Observable<any>{

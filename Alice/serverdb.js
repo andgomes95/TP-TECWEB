@@ -28,12 +28,12 @@ app.post('/login', function(req, res) {
             return res.status(401).send({ token: null, tipo: null });
         } else {
             if ( colaborador.password == user.password ) {
-                var token = jwt.sign({ id: aluno._id }, 'supersecret', {
+                var token = jwt.sign({ email: colaborador.email }, 'supersecret', {
                     expiresIn: 86400
                 });
-
+                
                 res.status(200);
-                if(colaborador.formacao==""){
+                if(colaborador.formacao=="professor"){
                     res.send({ token: token, tipo: 'professor' });
                 }else{
                     res.send({ token: token, tipo: 'colaborador' });
@@ -49,7 +49,7 @@ app.post('/login', function(req, res) {
 function verificaToken(req, res, next) {
 
     var token = req.headers['x-access-token'];
-
+    console.log(token)
     if (!token)
         return res.status(403).send({ auth: false, message: 'Nenhum token disponvível.' });
 
@@ -64,7 +64,7 @@ function verificaToken(req, res, next) {
 
 /**************************************************** COLABORADORES **********************************************************/
 //GET colaboradores
-app.get('/colaboradores', function(req, res){
+app.get('/colaboradores', verificaToken, function(req, res){
     dbo.collection('colaboradores').find().toArray(function(err,colaboradores){
         //if err console.log(err)
         res.setHeader('Content-Type', 'application/json')
@@ -74,7 +74,7 @@ app.get('/colaboradores', function(req, res){
 })
 
 //GET Colaboradores graduando
-app.get('/colaboradores/graduando', function(req,res){
+app.get('/colaboradores/graduando', verificaToken, function(req,res){
     fm = {formacao:"graduando"}
     dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
         if( err)     console.log(err)
@@ -91,7 +91,7 @@ app.get('/colaboradores/graduando', function(req,res){
 })
 
 //GET Colaboradores graduando
-app.get('/colaboradores/projeto', function(req,res){
+app.get('/colaboradores/projeto', verificaToken, function(req,res){
     var projeto = req.query.eq
     fm = {projeto:projeto}
     dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
@@ -109,7 +109,7 @@ app.get('/colaboradores/projeto', function(req,res){
 })
 
 //GET Colaborador em um projeto
-app.get('/colaboradores/projetos', function(req,res){
+app.get('/colaboradores/projetos', verificaToken, function(req,res){
     var projeto = req.query.eq
     fm = {projeto:projeto}
     dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
@@ -127,7 +127,7 @@ app.get('/colaboradores/projetos', function(req,res){
 })
 
 //GET Colaborador em uma publicação
-app.get('/colaboradores/publicacoes', function(req,res){
+app.get('/colaboradores/publicacoes', verificaToken, function(req,res){
     var publicacoes = req.query.eq
     fm = {publicacoes:publicacoes}
     dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
@@ -144,7 +144,7 @@ app.get('/colaboradores/publicacoes', function(req,res){
 })
 
 //GET Colaboradores mestrando
-app.get('/colaboradores/mestrando', function(req,res){
+app.get('/colaboradores/mestrando', verificaToken, function(req,res){
     fm = {formacao:"mestrando"}
     dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
         if( err)     console.log(err)
@@ -161,7 +161,7 @@ app.get('/colaboradores/mestrando', function(req,res){
 })
 
 //GET Colaboradores professor
-app.get('/colaboradores/professor', function(req,res){
+app.get('/colaboradores/professor', verificaToken, function(req,res){
     fm = {formacao:"professor"}
     dbo.collection('colaboradores').find(fm).toArray(function(err,colaboradores){
         if( err)     console.log(err)
@@ -178,7 +178,7 @@ app.get('/colaboradores/professor', function(req,res){
 })
 
 //GET um Colaborador
-app.get('/colaboradores/:email', function(req,res){
+app.get('/colaboradores/:email', verificaToken, function(req,res){
     var email = req.params.email
     dbo.collection('colaboradores').find({email:email}).toArray(function(err,colaboradores){
         if( err)     console.log(err)
@@ -194,7 +194,7 @@ app.get('/colaboradores/:email', function(req,res){
 })
  
 //Delete Colaboradores
-app.delete('/colaboradores',function(req,res){
+app.delete('/colaboradores', verificaToken,function(req,res){
     dbo.collection('colaboradores').remove({} , function(err, colaboradores){
         res.status(204)
         res.send('delete all')
@@ -202,7 +202,7 @@ app.delete('/colaboradores',function(req,res){
 })
 
 //Delete um colaborador
-app.delete('/colaboradores/:email',function(req,res){
+app.delete('/colaboradores/:email', verificaToken,function(req,res){
     var email = req.params.email
     var removido = {email:email}
     dbo.collection('colaboradores').deleteOne(removido , function(err, result){
@@ -212,7 +212,7 @@ app.delete('/colaboradores/:email',function(req,res){
 })
 
 //Adicionar colaboradores
-app.post('/colaboradores',function(req,res){
+app.post('/colaboradores', verificaToken,function(req,res){
     var colaboradores = req.body
     console.log(colaboradores.length)
     dbo.collection('colaboradores').insertOne(colaboradores , function(err, result){
@@ -223,7 +223,7 @@ app.post('/colaboradores',function(req,res){
 })
 
 //Alterar colaboradores
-app.put('/colaboradores',function(req,res){
+app.put('/colaboradores', verificaToken,function(req,res){
     var colaborador = req.body
     var id = {email : colaborador.email};
     dbo.collection('colaboradores').updateOne(id,{$set : colaborador} , function(err, result){
@@ -234,7 +234,7 @@ app.put('/colaboradores',function(req,res){
 })
 
 //Alterar projeto em colaborador
-app.put('/colaboradores/:email/projetos',function(req, res) {
+app.put('/colaboradores/:email/projetos', verificaToken,function(req, res) {
 
     var nome_projeto = req.query.eq;
     var email_colaborador = req.params.email;
@@ -252,7 +252,7 @@ app.put('/colaboradores/:email/projetos',function(req, res) {
 });
 
 //Alterar publicacoes em colaborador
-app.put('/colaboradores/:email/publicacoes',function(req, res) {
+app.put('/colaboradores/:email/publicacoes', verificaToken,function(req, res) {
 
     var publicacoes = req.query.eq;
     var list_publicacoes = publicacoes.split(',')
@@ -305,7 +305,7 @@ app.put('/colaboradores/:email/publicacoes',function(req, res) {
 
 /**************************************************** PUBLICACOES **********************************************************/
 //GET publicacoes
-app.get('/publicacoes', function(req, res){
+app.get('/publicacoes',  verificaToken,function(req, res){
     dbo.collection('publicacoes').find().toArray(function(err,publicacoes){
         //if err console.log(err)
         res.setHeader('Content-Type', 'application/json')
@@ -315,7 +315,7 @@ app.get('/publicacoes', function(req, res){
 })
 
 //GET publicacoes dado autor
-app.get('/publicacoes/colaboradores', function(req,res){
+app.get('/publicacoes/colaboradores', verificaToken, function(req,res){
     var colaboradores = req.query.eq
     fm = {autores:colaboradores}
     dbo.collection('publicacoes').find(fm).toArray(function(err,publicacoes){
@@ -333,7 +333,7 @@ app.get('/publicacoes/colaboradores', function(req,res){
 
 
 //GET uma publicacao
-app.get('/publicacoes/:code', function(req,res){
+app.get('/publicacoes/:code', verificaToken, function(req,res){
     var code = req.params.code
     dbo.collection('publicacoes').find({code:code}).toArray(function(err,publicacoes){
         //if err console.log(err)
@@ -345,7 +345,7 @@ app.get('/publicacoes/:code', function(req,res){
 })
 
 //Delete publicacoes
-app.delete('/publicacoes',function(req,res){
+app.delete('/publicacoes', verificaToken,function(req,res){
     dbo.collection('publicacoes').remove({} , function(err, publicacoes){
         res.status(204)
         res.send('delete all')
@@ -353,7 +353,7 @@ app.delete('/publicacoes',function(req,res){
 })
 
 //Delete uma publicacoes
-app.delete('/publicacoes/:code',function(req,res){
+app.delete('/publicacoes/:code', verificaToken,function(req,res){
     var code = req.params.code
     var removido = {code:code}
     dbo.collection('publicacoes').deleteOne(removido , function(err, result){
@@ -363,7 +363,7 @@ app.delete('/publicacoes/:code',function(req,res){
 })
 
 //Adicionar publicacoes
-app.post('/publicacoes',function(req,res){
+app.post('/publicacoes', verificaToken,function(req,res){
     var publicacoes = req.body
     dbo.collection('publicacoes').insertOne(publicacoes , function(err, result){
         //if err throw err
@@ -374,7 +374,7 @@ app.post('/publicacoes',function(req,res){
 })
 
 //Alterar publicacoes
-app.put('/publicacoes',function(req,res){
+app.put('/publicacoes', verificaToken,function(req,res){
     var publicacao = req.body
     var id = {code: publicacao.code}
     dbo.collection('publicacoes').updateOne(id,{$set : publicacao} , function(err, result){
@@ -385,7 +385,7 @@ app.put('/publicacoes',function(req,res){
 })
 
 //alterar autores em publicacoes
-app.put('/publicacoes/:code/colaboradores',function(req, res) {
+app.put('/publicacoes/:code/colaboradores', verificaToken,function(req, res) {
 
     var colaboradores = req.query.eq;
     var list_colaboradores = colaboradores.split(',')
@@ -437,7 +437,7 @@ app.put('/publicacoes/:code/colaboradores',function(req, res) {
 
 /**************************************************** PROJETOS **********************************************************/
 //GET projetos
-app.get('/projetos', function(req, res){
+app.get('/projetos', verificaToken, function(req, res){
     dbo.collection('projetos').find().toArray(function(err,projetos){
         //if err console.log(err)
         res.setHeader('Content-Type', 'application/json')
@@ -447,7 +447,7 @@ app.get('/projetos', function(req, res){
 })
 
 //GET projetos dado autor
-app.get('/projetos/colaboradores', function(req,res){
+app.get('/projetos/colaboradores', verificaToken, function(req,res){
     var colaboradores = req.query.eq
     fm = {colaboradores:colaboradores}
     dbo.collection('projetos').find(fm).toArray(function(err,projetos){
@@ -464,7 +464,7 @@ app.get('/projetos/colaboradores', function(req,res){
 })
 
 //GET um projeto
-app.get('/projetos/:nome', function(req,res){
+app.get('/projetos/:nome', verificaToken, function(req,res){
     var nome = req.params.nome
     dbo.collection('projetos').find({nome:nome}).toArray(function(err,projetos){
         //if err console.log(err)
@@ -475,7 +475,7 @@ app.get('/projetos/:nome', function(req,res){
 })
 
 //Delete projetos
-app.delete('/projetos',function(req,res){
+app.delete('/projetos', verificaToken,function(req,res){
     dbo.collection('projetos').remove({} , function(err, projetos){
         res.status(204)
         res.send('delete all')
@@ -483,7 +483,7 @@ app.delete('/projetos',function(req,res){
 })
 
 //Delete um projetos
-app.delete('/projetos/:nome',function(req,res){
+app.delete('/projetos/:nome', verificaToken,function(req,res){
     var nome = req.params.nome
     var removido = {nome:nome}
     dbo.collection('projetos').deleteOne(removido , function(err, result){
@@ -493,7 +493,7 @@ app.delete('/projetos/:nome',function(req,res){
 })
 
 //Adicionar projetos
-app.post('/projetos',function(req,res){
+app.post('/projetos', verificaToken,function(req,res){
     var projetos = req.body
     dbo.collection('projetos').insertOne(projetos , function(err, result){
         //if err throw err
@@ -503,7 +503,7 @@ app.post('/projetos',function(req,res){
 })
 
 //Alterar projetos
-app.put('/projetos',function(req,res){
+app.put('/projetos', verificaToken,function(req,res){
     var projeto = req.body
     var id = {nome: projeto.nome}
     dbo.collection('projetos').updateOne(id,{$set: projeto} , function(err, result){
@@ -514,7 +514,7 @@ app.put('/projetos',function(req,res){
 })
 
 //Alterar colaboradores em projetos
-app.put('/projetos/:nome/colaboradores',function(req, res) {
+app.put('/projetos/:nome/colaboradores', verificaToken,function(req, res) {
 
     var colaboradores = req.query.eq;
     var list_colaboradores = colaboradores.split(',')

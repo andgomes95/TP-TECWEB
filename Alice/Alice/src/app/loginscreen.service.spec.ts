@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import {LoginScreenService} from './loginscreen.service;
+import {LoginScreenService} from './loginscreen.service';
 
 describe('LoginScreenService',()=>{
     beforeEach(() => 

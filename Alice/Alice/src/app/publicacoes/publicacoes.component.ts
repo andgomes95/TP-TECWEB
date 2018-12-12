@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Publicacoes } from './publicacoes';
 import { PublicacoesService} from '../publicacoes.service';
+import {ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-publicacoes',
@@ -14,10 +16,13 @@ export class PublicacoesComponent implements OnInit {
   publicacoesNovo: Publicacoes;
   publicacoesAtualizar: Publicacoes;
 
-  constructor(private publicacoesService: PublicacoesService) { }
+  title: any;
+
+  constructor(private publicacoesService: PublicacoesService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadPublicacoes();
+    this.route.data.subscribe(data => this.title = data);
   }
 
   loadPublicacoes(): void{
