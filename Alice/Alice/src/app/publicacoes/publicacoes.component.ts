@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Publicacoes } from './publicacoes';
 import { PublicacoesService} from '../publicacoes.service';
 import {ActivatedRoute} from '@angular/router';
-
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-publicacoes',
@@ -15,10 +15,12 @@ export class PublicacoesComponent implements OnInit {
   publicacoesSelecionado: Publicacoes;
   publicacoesNovo: Publicacoes;
   publicacoesAtualizar: Publicacoes;
+  closeResult: string;
+
   value : any;
   title: any;
 
-  constructor(private publicacoesService: PublicacoesService, private route: ActivatedRoute) {
+  constructor(private publicacoesService: PublicacoesService, private route: ActivatedRoute, private modalService: NgbModal) {
     this.value = localStorage.getItem('TIPO');
    }
 
@@ -73,6 +75,24 @@ export class PublicacoesComponent implements OnInit {
   salvarAtualizarPublicacoes(): void{
     this.publicacoesService.atualizarPublicacoes(this.publicacoesAtualizar).subscribe();
     this.publicacoesAtualizar=null;
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
   
 }

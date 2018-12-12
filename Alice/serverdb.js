@@ -49,7 +49,7 @@ app.post('/login', function(req, res) {
 function verificaToken(req, res, next) {
 
     var token = req.headers['x-access-token'];
-    console.log(token)
+    
     if (!token)
         return res.status(403).send({ auth: false, message: 'Nenhum token disponvível.' });
 

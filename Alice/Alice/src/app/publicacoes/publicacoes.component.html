@@ -10,7 +10,7 @@
                   <div><span class="text-white">Código: </span> <input [(ngModel)]="publicacoesNovo.code" placeholder="code"></div>
                   <div><span class="text-white">Evento: </span> <input [(ngModel)]="publicacoesNovo.evento" placeholder="evento"></div>
                   <div><span class="text-white">Ano: </span> <input [(ngModel)]="publicacoesNovo.ano" placeholder="ano"></div>
-              
+                  <div><span class="text-white">Link: </span> <input [(ngModel)]="publicacoesNovo.link" placeholder="link"></div>
                   <br><button (click)="salvarNovoPublicacoes()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
               </div>
             </div>
@@ -28,6 +28,7 @@
               <br><i class="fas fa-info-circle"></i> {{publicacoes.nome}}
               <br><i class="fas fa-building"></i> {{publicacoes.evento}}
               <br><i class="fas fa-calendar-alt"></i> {{publicacoes.ano}}
+              <br>Link: <a href="{{publicacoes.link}}"> <i class="fas fa-newspaper"></i> </a>
           </p>
           <button type="button" *ngIf="value == 'professor'" class="btn btn-primary btn-sm" (click)="initAtualizar(publicacoes)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
           <button type="button" *ngIf="value == 'professor'" class="btn btn-danger btn-sm" (click)="apagar(publicacoes)"><i class="fa fa-times"></i></button>

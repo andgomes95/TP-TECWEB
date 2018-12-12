@@ -20,9 +20,9 @@ mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true}
 	/*Criação da Coleção de publicações*/
 	dbo.createCollection( 'publicacoes', function(err,res){
 		var db_disc = [
-		{code: 'SBCM2017Mosaicode', nome: 'Web Audio application development with Mosaicode', evento: '16th Brazilian Symposium on Computer Music', ano: '2017', local_evento: ' São Paulo',autores: ['fls@ufsj.edu.br']},
-		{code: 'CBSOFTTools2018Mosaicode', nome: 'O Ambiente de Programação Visual Mosaicode', evento: '9ª Sessão de Ferramentas do CBSoft', ano: '2018', local_evento: ' São Carlos',autores: ['fls@ufsj.edu.br']},
-		{code: 'UBIMUS2018Mosaicode', nome: 'Utilização do Ambiente Mosaicode como ferramenta de apoio para o ensino de Computação Musical', evento: 'VIII Workshop on Ubiquitous Music (UBIMUS)', ano: '2018', local_evento: ' São João del-Rei',autores: ['fls@ufsj.edu.br']}
+		{code: 'SBCM2017Mosaicode', nome: 'Web Audio application development with Mosaicode', evento: '16th Brazilian Symposium on Computer Music', ano: '2017', local_evento: ' São Paulo',autores: ['fls@ufsj.edu.br'],link: 'alice.dcomp.ufsj.edu.br/wp-content/uploads/2018/05/VR-DigitalArts-Mosaicode.pdf'},
+		{code: 'CBSOFTTools2018Mosaicode', nome: 'O Ambiente de Programação Visual Mosaicode', evento: '9ª Sessão de Ferramentas do CBSoft', ano: '2018', local_evento: ' São Carlos',autores: ['fls@ufsj.edu.br'],link: 'https://www.revistas.ufg.br/musica/article/view/53577'},
+		{code: 'UBIMUS2018Mosaicode', nome: 'Utilização do Ambiente Mosaicode como ferramenta de apoio para o ensino de Computação Musical', evento: 'VIII Workshop on Ubiquitous Music (UBIMUS)', ano: '2018', local_evento: ' São João del-Rei',autores: ['fls@ufsj.edu.br'],link: 'http://sibgrapi.sid.inpe.br/rep/sid.inpe.br/sibgrapi/2018/10.17.13.54?metadatarepository=sid.inpe.br/sibgrapi/2018/10.17.13.54.46&ibiurl.backgroundlanguage=pt&ibiurl.requiredsite=sibgrapi.sid.inpe.br+800&requiredmirror=sid.inpe.br/banon/2001/03.30.15.38.24&searchsite=sibgrapi.sid.inpe.br:80&searchmirror=sid.inpe.br/banon/2001/03.30.15.38.24&choice=briefTitleAuthorMisc'}
 		]
 		dbo.collection('publicacoes').insertMany(db_disc, function(err,res){
 			if(err) throw err
@@ -33,8 +33,8 @@ mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true}
 	/*Criação da Coleção de projetos*/
 	dbo.createCollection( 'projetos', function(err,res){
 		var db_disc = [
-		{nome: 'Mosaicode', descricao: 'Ambiente de Programação Visual'},
-		{nome: 'Orchidea', descricao: 'Orquestra de Ideias'}
+		{nome: 'Mosaicode', descricao: 'Mosaicode is a visual programming environment that aims to meet the specific demands of the field of Digital Arts and generate applications for this field.	It is aimed that this tool will help artists to develop their work in a simple and practical way.', image: 'https://mosaicode.github.io/media/logo.png'},
+		{nome: 'Orchidea', descricao: 'Orquestra de Ideias',image: 'https://alice.dcomp.ufsj.edu.br/wp-content/uploads/2018/08/rabbit-600-230x300.png'}
 		]
 		dbo.collection('projetos').insertMany(db_disc, function(err,res){
 			if(err) throw err

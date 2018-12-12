@@ -5,5 +5,6 @@ export class Colaboradores{
     github: string;
     lattes: string;
     image: string;
+    password: string;
 }
 

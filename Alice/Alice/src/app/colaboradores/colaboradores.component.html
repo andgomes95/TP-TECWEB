@@ -12,6 +12,7 @@
                 <div><span class="text-white">Github: </span> <input [(ngModel)]="colaboradoresNovo.github" placeholder="github"></div>
                 <div><span class="text-white">Lattes: </span> <input [(ngModel)]="colaboradoresNovo.lattes" placeholder="lattes"></div>
                 <div><span class="text-white">Imagem: </span> <input [(ngModel)]="colaboradoresNovo.image" placeholder="image"></div>
+                <div><span class="text-white">Password: </span> <input type="password" [(ngModel)]="colaboradoresNovo.password" placeholder="password"></div>
             
                 <br><button (click)="salvarNovoColaboradores()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
             </div>
@@ -63,10 +64,10 @@
               </div>
           </div>
         </ng-template>
+        <!--FIM MODAL-->
 
-<hr>
 
-<!--FIM MODAL-->
+
         <br><br>
         <div *ngIf="colaboradoresAtualizar==colaboradores">
             <div class="card bg-secondary mb-3" style="max-width: 18rem;">

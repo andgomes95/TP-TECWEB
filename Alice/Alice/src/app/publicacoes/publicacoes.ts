@@ -3,4 +3,5 @@ export class Publicacoes{
     nome: string;
     evento: string;
     ano: string;
+    link: string;
 }

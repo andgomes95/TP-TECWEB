@@ -8,6 +8,7 @@
               <div class="card-body">
                   <div><span class="text-white">Nome: </span> <input [(ngModel)]="projetosNovo.nome" placeholder="nome"></div>
                   <div><span class="text-white">Descricao: </span> <input [(ngModel)]="projetosNovo.descricao" placeholder="descricao"></div>
+                  <div><span class="text-white">Imagem: </span> <input [(ngModel)]="projetosNovo.image" placeholder="image"></div>
               
                   <br><button (click)="salvarNovoProjetos()">Salvar</button> <button (click)="cancelar()">Cancelar</button>
               </div>
@@ -22,10 +23,37 @@
         <div class="card-body">
           <h5 class="card-title">{{projetos.nome}}</h5>
           <p class="card-text">
-              <br><i class="fas fa-file-text"></i> {{projetos.descricao}}
-          </p>
-          <button type="button" *ngIf="value == 'professor'" class="btn btn-primary btn-sm" (click)="initAtualizar(projetos)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
-          <button type="button" *ngIf="value == 'professor'" class="btn btn-danger btn-sm" (click)="apagar(projetos)"><i class="fa fa-times"></i></button>
+              <img src="{{projetos.image}}"  width=200 height=200 (click)="open(content)"></p>
+        <!--=================================
+          MODAL 
+        ===========================================================-->
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">{{projetos.nome}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                  <img src="{{projetos.image}}"  width=400 height=400>
+                <div class="input-group">
+                  <i class="fas fa-envelope"></i>&nbsp; {{projetos.descricao}}  
+                </div>
+
+                <br>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+              <div class="input-group">
+                  <button type="button" *ngIf="value == 'professor'" class="btn btn-primary btn-sm" (click)="initAtualizar(projetos)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
+                  <button type="button" *ngIf="value == 'professor'" class="btn btn-danger btn-sm" (click)="apagar(projetos)"><i class="fa fa-times"></i></button>
+              </div>
+          </div>
+        </ng-template>
+        <!--FIM MODAL-->
           <br><br>
           <div *ngIf="projetosAtualizar==projetos">
               <div class="card bg-secondary mb-3" style="max-width: 18rem;">
