@@ -25,7 +25,7 @@ export class ProjetosService{
     }
 
     apagarProjetos(projetos: Projetos): Observable<any> {
-        return this.http.delete('http://localhost:3001/projetos/' + projetos.nome);
+        return this.http.delete('http://localhost:3001/projetos/' + projetos.nome,httpOptions);
     }
     
     adicionar(projetos: Projetos): Observable<any> {

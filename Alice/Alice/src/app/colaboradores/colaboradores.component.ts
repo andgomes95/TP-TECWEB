@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Colaboradores } from './colaboradores';
 import { ColaboradoresService} from '../colaboradores.service';
 import {ActivatedRoute} from '@angular/router';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-colaboradores',
@@ -16,11 +17,12 @@ export class ColaboradoresComponent implements OnInit {
   colaboradoresNovo: Colaboradores;
   colaboradoresAtualizar: Colaboradores;
 
+  closeResult: string;
   value: any;
 
   title: any;
 
-  constructor(private colaboradoresService: ColaboradoresService, private route: ActivatedRoute) { 
+  constructor(private colaboradoresService: ColaboradoresService, private route: ActivatedRoute, private modalService: NgbModal) { 
     this.value = localStorage.getItem('TIPO');
    }
 
@@ -75,6 +77,24 @@ export class ColaboradoresComponent implements OnInit {
   salvarAtualizarColaboradores(): void{
     this.colaboradoresService.atualizarColaboradores(this.colaboradoresAtualizar).subscribe();
     this.colaboradoresAtualizar=null;
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
 }

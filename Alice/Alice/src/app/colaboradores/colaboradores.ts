@@ -4,4 +4,6 @@ export class Colaboradores{
     formacao: string;
     github: string;
     lattes: string;
+    image: string;
 }
+

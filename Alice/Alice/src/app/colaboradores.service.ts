@@ -28,7 +28,7 @@ export class ColaboradoresService{
     }
 
     apagarColaboradores(colaboradores: Colaboradores): Observable<any> {
-        return this.http.delete('http://localhost:3001/colaboradores/' + colaboradores.email);
+        return this.http.delete('http://localhost:3001/colaboradores/' + colaboradores.email,httpOptions);
     }
     
     adicionar(colaboradores: Colaboradores): Observable<any> {

@@ -6,10 +6,10 @@ mongo_client.connect('mongodb://localhost:27017/ALICE', {useNewUrlParser : true}
 	dbo.createCollection( 'colaboradores', function(err,res){
 		if(err) throw err
 		var db_alunos = [
-				{nome: 'Andre Gomes', email: 'andgomes95@gmail.com', formacao: 'graduando', github: 'https://github.com/andgomes95', lattes: 'http://lattes.cnpq.br/0762220978450376',password: "123456"},
-				{nome: 'Jose Mauro', email: 'jmsandy@gmail.com', formacao: 'mestrando', github: 'https://github.com/jmsandy', lattes: 'http://lattes.cnpq.br/5849035895177823', password: "123456"},
-				{nome: 'Frederico Resende', email: 'fredribeiro97@gmail.com', formacao: 'graduando', github: 'https://github.com/frederr97', lattes: 'http://lattes.cnpq.br/6452558884220881', password: "123456"},
-				{nome: 'Flavio Schiavoni', email: 'fls@ufsj.edu.br', formacao: 'professor', github: 'https://github.com/flschiavoni', lattes: 'http://lattes.cnpq.br/1259591090948385', password: "123456"}
+				{nome: 'Andre Gomes', email: 'andgomes95@gmail.com', formacao: 'graduando', github: 'https://github.com/andgomes95', lattes: 'http://lattes.cnpq.br/0762220978450376',password: "123456",image: "https://scontent.fjdf1-1.fna.fbcdn.net/v/t1.0-9/15621903_1359375777414059_2848019663471389067_n.jpg?_nc_cat=109&_nc_ht=scontent.fjdf1-1.fna&oh=79d23556b19ce92a88cb8b46de22896f&oe=5C90AD4E"},
+				{nome: 'Jose Mauro', email: 'jmsandy@gmail.com', formacao: 'mestrando', github: 'https://github.com/jmsandy', lattes: 'http://lattes.cnpq.br/5849035895177823', password: "123456", image: "https://alice.dcomp.ufsj.edu.br/wp-content/uploads/2018/08/rabbit-600-230x300.png"},
+				{nome: 'Frederico Resende', email: 'fredribeiro97@gmail.com', formacao: 'graduando', github: 'https://github.com/frederr97', lattes: 'http://lattes.cnpq.br/6452558884220881', password: "123456",image: "https://alice.dcomp.ufsj.edu.br/wp-content/uploads/2018/08/rabbit-600-230x300.png"},
+				{nome: 'Flavio Schiavoni', email: 'fls@ufsj.edu.br', formacao: 'professor', github: 'https://github.com/flschiavoni', lattes: 'http://lattes.cnpq.br/1259591090948385', password: "flavio", image: "https://alice.dcomp.ufsj.edu.br/wp-content/uploads/2018/08/rabbit-600-230x300.png"}
 			]
 		dbo.collection('colaboradores').insertMany(db_alunos, function(err,res){
 			if(err) throw err

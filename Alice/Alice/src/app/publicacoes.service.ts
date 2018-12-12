@@ -25,7 +25,7 @@ export class PublicacoesService{
     }
 
     apagarPublicacoes(publicacoes: Publicacoes): Observable<any> {
-        return this.http.delete('http://localhost:3001/publicacoes/' + publicacoes.code);
+        return this.http.delete('http://localhost:3001/publicacoes/' + publicacoes.code,httpOptions);
     }
     
     adicionar(publicacoes: Publicacoes): Observable<any> {

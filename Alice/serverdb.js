@@ -178,9 +178,9 @@ app.get('/colaboradores/professor', verificaToken, function(req,res){
 })
 
 //GET um Colaborador
-app.get('/colaboradores/:email', verificaToken, function(req,res){
-    var email = req.params.email
-    dbo.collection('colaboradores').find({email:email}).toArray(function(err,colaboradores){
+app.get('/colaboradores/:user', verificaToken, function(req,res){
+    var user = req.params.user
+    dbo.collection('colaboradores').find({user:user}).toArray(function(err,colaboradores){
         if( err)     console.log(err)
         res.setHeader('Content-Type', 'application/json')
         res.status(200)
@@ -188,7 +188,7 @@ app.get('/colaboradores/:email', verificaToken, function(req,res){
         if (result.length > 2){
             res.send(result) 
         }else{
-            res.send(JSON.stringify(email+ ' nao cadastrado!') );
+            res.send(JSON.stringify(user+ ' nao cadastrado!') );
         }
     })
 })
