@@ -15,15 +15,14 @@ export class LoginscreenComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private loginService: LoginScreenService, private router: Router, private ngZone: NgZone) {
+  constructor(private loginService: LoginScreenService, private router: Router, private ngZone: NgZone) { 
     
-  }
+   }
 
   login() {
     this.loginService.login(this.email, this.password).subscribe(
       user => {
         if (user.token) {
-          
           localStorage.setItem('TOKEN', user.token);
           localStorage.setItem('TIPO', user.tipo);
           this.ngZone.run(() => {

@@ -1,6 +1,6 @@
 <br><h2 class="text-white"  style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Colaboradores</h2><br>
 <div ngbDropdown >
-  <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle><i class="fas fa-user-plus"></i></button>
+  <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle *ngIf="value == 'professor'"><i class="fas fa-user-plus"></i></button>
   <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="bg-secondary mb-3">
     <div class="dropdown-item" *ngIf="colaboradoresNovo" class="bg-secondary mb-3">
         <div class="card bg-secondary mb-3" style="max-width: 25rem;">
@@ -30,8 +30,8 @@
             <br><div><a href="{{colaboradores.github}}" target="_blank"><button type="button" class="btn btn-secondary btn-sm"><i class="fab fa-github"></i></button></a>&nbsp;
             <a href="{{colaboradores.lattes}}" target="_blank"><button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-align-justify"></i></button></a></div>
         </p>
-        <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(colaboradores)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
-        <button type="button" class="btn btn-danger btn-sm" (click)="apagar(colaboradores)"><i class="fa fa-times"></i></button>
+        <button type="button" *ngIf="value == 'professor'" class="btn btn-primary btn-sm" (click)="initAtualizar(colaboradores)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
+        <button type="button" *ngIf="value == 'professor'" class="btn btn-danger btn-sm" (click)="apagar(colaboradores)"><i class="fa fa-times"></i></button>
         <br><br>
         <div *ngIf="colaboradoresAtualizar==colaboradores">
             <div class="card bg-secondary mb-3" style="max-width: 18rem;">

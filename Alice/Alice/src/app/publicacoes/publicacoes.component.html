@@ -1,6 +1,6 @@
 <br><h2 class="text-white"  style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Publicações</h2><br>
 <div ngbDropdown >
-    <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle><i class="fas fa-user-plus"></i></button>
+    <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle *ngIf="value == 'professor'"><i class="fas fa-user-plus"></i></button>
     <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="bg-secondary mb-3">
       <div class="dropdown-item" *ngIf="publicacoesNovo" class="bg-secondary mb-3">
           <div class="card bg-secondary mb-3" style="max-width: 25rem;">
@@ -29,8 +29,8 @@
               <br><i class="fas fa-building"></i> {{publicacoes.evento}}
               <br><i class="fas fa-calendar-alt"></i> {{publicacoes.ano}}
           </p>
-          <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(publicacoes)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
-          <button type="button" class="btn btn-danger btn-sm" (click)="apagar(publicacoes)"><i class="fa fa-times"></i></button>
+          <button type="button" *ngIf="value == 'professor'" class="btn btn-primary btn-sm" (click)="initAtualizar(publicacoes)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
+          <button type="button" *ngIf="value == 'professor'" class="btn btn-danger btn-sm" (click)="apagar(publicacoes)"><i class="fa fa-times"></i></button>
           <br><br>
           <div *ngIf="publicacoesAtualizar==publicacoes">
               <div class="card bg-secondary mb-3" style="max-width: 18rem;">

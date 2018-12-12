@@ -1,6 +1,6 @@
 <br><h2 class="text-white"  style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Projetos</h2><br>
 <div ngbDropdown >
-    <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle><i class="fas fa-user-plus"></i></button>
+    <button type="button" class="btn btn-secondary" id="dropdownConfig" (click)="adicionar()" ngbDropdownToggle *ngIf="value == 'professor'"><i class="fas fa-user-plus"></i></button>
     <div ngbDropdownMenu aria-labelledby="dropdownConfig" class="bg-secondary mb-3">
       <div class="dropdown-item" *ngIf="projetosNovo" class="bg-secondary mb-3">
           <div class="card bg-secondary mb-3" style="max-width: 25rem;">
@@ -24,8 +24,8 @@
           <p class="card-text">
               <br><i class="fas fa-file-text"></i> {{projetos.descricao}}
           </p>
-          <button type="button" class="btn btn-primary btn-sm" (click)="initAtualizar(projetos)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
-          <button type="button" class="btn btn-danger btn-sm" (click)="apagar(projetos)"><i class="fa fa-times"></i></button>
+          <button type="button" *ngIf="value == 'professor'" class="btn btn-primary btn-sm" (click)="initAtualizar(projetos)"><i class="fas fa-pencil-alt"></i></button>&nbsp;
+          <button type="button" *ngIf="value == 'professor'" class="btn btn-danger btn-sm" (click)="apagar(projetos)"><i class="fa fa-times"></i></button>
           <br><br>
           <div *ngIf="projetosAtualizar==projetos">
               <div class="card bg-secondary mb-3" style="max-width: 18rem;">

@@ -20,7 +20,9 @@ export class ColaboradoresComponent implements OnInit {
 
   title: any;
 
-  constructor(private colaboradoresService: ColaboradoresService, private route: ActivatedRoute) {  }
+  constructor(private colaboradoresService: ColaboradoresService, private route: ActivatedRoute) { 
+    this.value = localStorage.getItem('TIPO');
+   }
 
   ngOnInit() {
     this.loadColaboradores();

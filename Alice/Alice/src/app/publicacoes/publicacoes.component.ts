@@ -15,10 +15,12 @@ export class PublicacoesComponent implements OnInit {
   publicacoesSelecionado: Publicacoes;
   publicacoesNovo: Publicacoes;
   publicacoesAtualizar: Publicacoes;
-
+  value : any;
   title: any;
 
-  constructor(private publicacoesService: PublicacoesService, private route: ActivatedRoute) { }
+  constructor(private publicacoesService: PublicacoesService, private route: ActivatedRoute) {
+    this.value = localStorage.getItem('TIPO');
+   }
 
   ngOnInit() {
     this.loadPublicacoes();

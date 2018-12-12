@@ -14,10 +14,12 @@ export class ProjetosComponent implements OnInit {
   projetosSelecionado: Projetos;
   projetosNovo: Projetos;
   projetosAtualizar: Projetos;
-
+  value: any;
   title: any;
 
-  constructor(private projetosService: ProjetosService, private route: ActivatedRoute) { }
+  constructor(private projetosService: ProjetosService, private route: ActivatedRoute) { 
+    this.value = localStorage.getItem('TIPO');
+  }
 
   ngOnInit() {
     this.loadProjetos();
